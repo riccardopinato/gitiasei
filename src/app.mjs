@@ -1,5 +1,6 @@
 import { categories, discoveries, catalogMeta } from "./catalog.mjs";
 import { directoryModules, filterDirectory, validateDirectory } from "./directory.mjs";
+import { renderOfficialHighlights, renderPreviewPanel } from "./preview.mjs";
 import { filterDiscoveries, sanitizePreferences, toggleId, validateCatalog, STORAGE_KEY } from "./core.mjs";
 
 if (validateCatalog(discoveries).length || validateDirectory(directoryModules).length) throw new Error("Invalid concept catalog or directory");
@@ -57,7 +58,7 @@ function reel(item, index) {
     '<div class="reel-category">' + html(label(item.category)) + ' / ' + html(item.area) + '</div>' +
     '<h2>' + html(spoiler(item) ? "SPOILER SHIELDED" : item.title) + '</h2>' +
     '<p>' + html(spoiler(item) ? "Sensitive preview hidden. Open the file to reveal the concept." : item.summary) + '</p>' +
-    '<div class="tags">' + item.tags.map((tag) => '<span>' + html(tag) + '</span>').join("") + '</div>' +
+    '<div class="tags">' + (spoiler(item) ? "" : item.tags.map((tag) => '<span>' + html(tag) + '</span>').join("")) + '</div>' +
     '<div class="media-note">▶  VIDEO PENDING RIGHTS REVIEW</div></div>' +
     '<div class="reel-actions"><button type="button" data-action="save" data-id="' + html(item.id) +
     '" aria-label="' + (saved(item.id) ? "Remove bookmark" : "Bookmark") + '" aria-pressed="' +
@@ -69,12 +70,13 @@ function reel(item, index) {
 }
 function renderFeed() {
   renderCategories();
+  renderOfficialHighlights(el("officialHighlights"),prefs.hideSpoilers);
   const items = filterDiscoveries(discoveries, { category });
   el("reelFeed").innerHTML = items.length ? items.map(reel).join("") : '<div class="empty">NO SIGNAL HERE.</div>';
 }
 function file(item, index) {
   return '<article class="file-card"><span class="file-index">' + String(index + 1).padStart(2, "0") + '</span>' +
-    '<div class="file-meta"><b>' + html(item.title) + '</b><small>' + html(label(item.category)) +
+    '<div class="file-meta"><b>' + html(spoiler(item) ? "SPOILER SHIELDED" : item.title) + '</b><small>' + html(label(item.category)) +
     ' / ' + html(item.area) + '</small></div><div class="file-actions">' +
     '<button type="button" data-action="detail" data-id="' + html(item.id) + '">OPEN ↗</button>' +
     '<button type="button" data-action="save" data-id="' + html(item.id) + '">' +
@@ -97,7 +99,7 @@ function renderDiscover() {
       '"><small>FREQUENCY ' + String(i + 1).padStart(2, "0") + '</small><strong>' + html(c.label) +
       '</strong><span>' + count + ' DEMO FILES ↗</span></button>';
   }).join("");
-  const items = filterDiscoveries(discoveries, { search: query });
+  const items = filterDiscoveries(discoveries, { search: query }).filter((item) => !(prefs.hideSpoilers && item.spoiler));
   el("discoverList").innerHTML = items.length ? items.map(file).join("") :
     '<div class="empty"><b>NO SIGNAL FOUND.</b><p>Try a different search.</p></div>';
   el("discoverCount").textContent = items.length + " demo files";
@@ -108,7 +110,7 @@ function renderDirectory() {
   el("directoryGrid").innerHTML = modules.length ? modules.map((section) =>
     '<button type="button" class="directory-card" data-action="directory" data-directory="' + html(section.id) +
     '" aria-label="Browse ' + html(section.title) + '">' +
-    '<span class="directory-overline">' + html(section.group) + ' / ' + html(section.state === "DEMO" ? "CONCEPT" : "NO DATA YET") + '</span>' +
+    '<span class="directory-overline">' + html(section.group) + ' / ' + html(section.state === "DEMO" ? "CONCEPT" : section.state === "PREVIEW" ? "PREVIEW" : "NO DATA YET") + '</span>' +
     '<strong>' + html(section.title) + '</strong><span class="directory-cta">OPEN SECTION ↗</span></button>'
   ).join("") : '<div class="empty directory-empty">NO MATCHING SECTIONS.</div>';
   el("directoryCount").textContent = String(modules.length).padStart(2, "0") + " SECTIONS";
@@ -132,6 +134,7 @@ function renderDirectory() {
     '<span class="eyebrow">' + html(section.group) + ' / ' + html(section.state) + '</span>' +
     '<h3 class="directory-heading">' + html(section.title) + '</h3>' +
     '<p class="lead directory-intro">' + html(section.description) + '</p>' + content;
+  renderPreviewPanel(section,el("directoryPanel"),prefs.hideSpoilers);
 }
 
 function renderSaved() {
@@ -168,9 +171,9 @@ function renderDetail(id) {
   el("detailContent").innerHTML =
     '<div class="detail-cover"><strong>DEMO<br>FILE.</strong></div><div class="sheet-body">' +
     '<span class="eyebrow">' + html(label(item.category)) + ' / ' + html(item.eyebrow) + '</span>' +
-    '<h2 id="detailTitle">' + html(item.title) + '</h2>' +
+    '<h2 id="detailTitle">' + html(spoiler(item) ? "SPOILER SHIELDED" : item.title) + '</h2>' +
     '<span class="demo-chip">● ILLUSTRATIVE ONLY · NOT A VERIFIED GTA VI DISCOVERY</span>' +
-    '<p>' + html(item.summary) + '</p><div class="detail-lines"><span>LOCATION</span><b>' +
+    '<p>' + html(spoiler(item) ? "Demo detail hidden by spoiler setting." : item.summary) + '</p><div class="detail-lines"><span>LOCATION</span><b>' +
     html(item.location) + '</b><span>CLIP SOURCE</span><b>Not attached — creator rights unverified</b>' +
     '<span>EDITORIAL</span><b>' + html(item.status) + '</b></div>' +
     '<div class="detail-buttons"><button data-action="save" data-id="' + html(id) + '">' +
@@ -226,6 +229,10 @@ el("spoilerToggle").addEventListener("change", (event) => {
   prefs.hideSpoilers = event.target.checked;
   persist();
   renderFeed();
+  renderDiscover();
+  renderMap();
+  renderSaved();
+  if (activeDirectory) renderDirectory();
   notify(prefs.hideSpoilers ? "SPOILER SHIELD ON" : "SPOILER SHIELD OFF");
 });
 document.querySelectorAll("dialog").forEach((dialog) => dialog.addEventListener("click", (event) => {
