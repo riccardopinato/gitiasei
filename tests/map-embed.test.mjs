@@ -6,6 +6,7 @@ import {createCamera,zoomAt,screenToWorld,worldToScreen,clusteredPins,
 const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const app=readFileSync(new URL("../src/app.mjs",import.meta.url),"utf8");
 const native=readFileSync(new URL("../src/native-map.mjs",import.meta.url),"utf8");
+const build=readFileSync(new URL("../scripts/build.mjs",import.meta.url),"utf8");
 const css=readFileSync(new URL("../src/styles.css",import.meta.url),"utf8");
 const land=JSON.parse(readFileSync(new URL("../public/data/map-land.v1.json",import.meta.url),"utf8"));
 const roads=JSON.parse(readFileSync(new URL("../public/data/map-roads.v1.json",import.meta.url),"utf8"));
@@ -71,4 +72,11 @@ test("licensed data attribution remains available without third-party network de
   assert.match(html,/DATA CREDITS & LICENSE/);
   assert.ok(native.includes('fetch(path,{credentials:"same-origin"})'));
   assert.match(app,/getHideSpoilers/);
+});
+
+test("Vercel build generates and validates the complete local map bundle",()=>{
+  assert.match(build,/await canonicalBuild\(\)/);
+  assert.match(build,/validateMapPack\(\{ land, roads, pins \}\)/);
+  for(const name of ["map-land.v1.json","map-roads.v1.json","map-pins.v1.json"])
+    assert.ok(build.includes(name), "Missing deployment map asset: "+name);
 });
