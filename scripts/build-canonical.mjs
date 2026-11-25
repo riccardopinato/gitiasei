@@ -72,6 +72,22 @@ export async function canonicalBuild() {
   }
   await writeFile(join(publicData, "research-manifest.json"),
     JSON.stringify(previewManifest) + "\n");
+  // Local map overlays are all unverified community research records. Coordinates are
+  // in the same Open GTA 6 Map 1024-unit projection as the CC BY coastline/roads.
+  const mapPins = records.filter((r) => r.type === "location").map((r) => ({
+    id: r.id, name: r.title, kind: r.attributes.kind, group: r.group,
+    area: r.attributes.area || "", x: r.geographic?.x, y: r.geographic?.y,
+    confidence: r.attributes.confidence, status: "UNVERIFIED"
+  }));
+  if (mapPins.length !== 4687 || mapPins.some((p) => !Number.isFinite(p.x) ||
+      !Number.isFinite(p.y) || p.x < 0 || p.x > 1024 || p.y < 0 || p.y > 1024 ||
+      p.status !== "UNVERIFIED")) throw new Error("Invalid local-map research overlay");
+  const mapOutput = {
+    schema: "gitiasei.native-map.pins.v1", projection: "open-gta6-map:1024-units",
+    license: "CC BY 4.0", sourceCommit: SOURCE_REVISIONS.openmap,
+    publicationStatus: "RESEARCH_ONLY", count: mapPins.length, pins: mapPins
+  };
+  await writeFile(join(publicData, "map-pins.v1.json"), JSON.stringify(mapOutput) + "\n");
   const reviewBatches = join(destination, "review-batches");
   await mkdir(reviewBatches, { recursive: true });
   // Deterministic 100-ID disjoint batches. This is automated QA, not independent factual verification.
