@@ -1,30 +1,30 @@
 # Roadmap — Gitiasei / Leonida Signal
 
-## V0.1 · FOUNDATIONS (in PR)
-- Web-native PWA shell; original Vice-inspired dark/sunset visual system.
-- Demo-only reel/feed, search/categories, schematic map pins and detail.
-- Saved/found progress, spoiler control and accessible dialogs.
-- First-party assets; no copied GTA art or unauthorized clips.
-- GitHub Actions for lint/test/static artifact.
+## v0.2.0 · SOURCE-TRANSPARENT RESEARCH PREVIEW — IMPLEMENTED (pending merge)
+- Original responsive PWA shell, five explicitly fictional demo reel cards, schematic map, local-first saved/found and spoiler shield.
+- 14-section directory with source-checked Rockstar names and facts (8 characters, 6 regions and 2 launch/platform facts).
+- Community **research lab** with 4,687 source-attributed but unverified records, split into six lazy-loaded groups.
+- Canonical dataset of 8,960 staging entities with exact-ID provenance joins and 1,218 review-only duplicate suggestions.
+- 47 disjoint QA batches, 100 records each except final batch of 87, all with 0 third-party uncorroborated approvals.
+- Rights-first video registry of 13 official Rockstar source links and the ZIP offered by the publisher; no clips rehosted.
+- Preserve saved/found stable IDs across source version changes; responsive polish and source-link navigation.
+- Tests, source integrity checks, CI static build, browser smoke before main merge; no public deployment automatically.
 
-## V0.2 · RIGHTS-CLEARED CONTENT
-- Provenance/rights review and creator-permission registry.
-- Moderated manual clip curation; deduplication; factual editorial review.
-- Embed adapters per platform with terms, fallback links and privacy review.
-- Real locations verified against permitted source maps.
-- Public canonical URLs and prerendered discovery pages for SEO.
+## v0.3 · CONTENT ADMISSION AND TRUE MEDIA
+- Source-based factual checks for independent 100-ID batches, with proof, confidence and correct map projection per item.
+- Dedup review/decisions with stable redirect IDs; user-data-preserving catalog migration.
+- License audit for screenshots and media; moderated permissioned creator submissions, opt-out and takedown handling.
+- Real geographic map engine with verified game points, cluster/filter/canonical deep links.
+- Authorized clip playback through platform-compliant embeds, only where rights and privacy gates pass.
 
-## V0.3 · DISCOVERY / MAP
-- Clustering, category layers, real game map only if licensed/permitted.
-- Saved/found progression, spoiler categories, export of private state.
-- Trending with transparent ranking; no fake engagement metrics.
-
-## V0.4 · COMMUNITY & REVENUE
-- Anti-spam community submissions, moderation queues, creator opt-out.
-- Consent-first analytics, contextual ads only if platform/game policy allows.
-- Web public deployment after explicit release approval.
-- Optional Flutter Android companion after Web retention validation.
+## v0.4 · COMMUNITY GROWTH
+- Original SEO-friendly canonical item pages only after verified content exists.
+- Rich offline saved/found lists with user-owned export/import and recovery.
+- Web visual/mobile QA and explicit deployment authorization.
+- Later Flutter Android/iOS companion only after web experience validated.
 
 ## Release gates
-Rights/provenance > catalog data validation > design QA > CI > device/browser smoke > deployment permission.
-PWA build alone does not prove live clips, runtime performance or public deployment.
+- Source data and media rights review precede public factual release or republishing third-party assets.
+- CI PASS is not proof of clip permission, game accuracy or browser/physical QA.
+- Published app search/feed never promote raw candidates merely because a source file labels them "confirmed."
+- Research-only preview is visibly separate from verified content and spoiler-gated.

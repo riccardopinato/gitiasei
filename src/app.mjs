@@ -86,7 +86,7 @@ function renderMap(highlightId = null) {
   el("mapPins").innerHTML = discoveries.map((item, i) =>
     '<button type="button" data-action="detail" data-id="' + html(item.id) +
     '" class="map-pin ' + (highlightId === item.id ? "selected" : "") + '" style="left:' +
-    item.map.x + '%;top:' + item.map.y + '%" aria-label="Open map file ' + html(item.title) +
+    item.map.x + '%;top:' + item.map.y + '%" aria-label="Open map file ' + html(spoiler(item) ? "SPOILER SHIELDED" : item.title) +
     '"><span>' + (found(item.id) ? "✓" : String(i + 1).padStart(2, "0")) + '</span></button>'
   ).join("");
   el("mapList").innerHTML = discoveries.map(file).join("");
