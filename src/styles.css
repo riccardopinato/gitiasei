@@ -139,3 +139,90 @@ html,body{overflow-x:clip}
  .native-map-shield p{font-size:11px;margin:6px 0 10px;line-height:1.4}
  .native-map-shield button{font-size:11px;padding:10px}
 }
+
+/* Gitiasei immersive adaptive shell — app ergonomics on phones, real desktop width. */
+html{scroll-snap-type:none}
+body{overscroll-behavior-y:contain}
+.app{max-width:none;width:100%;box-shadow:none}
+.app main{min-width:0}
+button,a,select{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.reel{content-visibility:auto;contain-intrinsic-size:auto 600px}
+.install-quick{flex:none;border:1px solid #65e9d686;background:#163841;color:var(--aqua);font:800 11px var(--head);letter-spacing:.6px;padding:11px 13px}
+.install-quick[hidden],.install-panel[hidden],#installAppButton[hidden]{display:none!important}
+.install-panel{margin:18px 0 8px;padding:16px;border:1px solid #66e8d083;background:linear-gradient(130deg,#132f3b,#181d32)}
+.install-panel strong{font:900 19px var(--head);letter-spacing:.8px;color:var(--aqua)}
+.install-panel p{margin:10px 0;color:#f0dfd7;font-size:13px;line-height:1.55}
+#installAppButton{padding:12px 17px;background:var(--aqua);color:#0a1825;font:900 15px var(--head);border:0}
+@media(max-width:1099px){.tabbar{width:100%;left:0;transform:none}}
+@media(min-width:700px) and (max-width:1099px){
+ .native-map-viewport{height:clamp(490px,68dvh,850px)}
+ .content-page{padding-inline:clamp(20px,4vw,42px)}
+ .reels{grid-template-columns:repeat(2,minmax(0,1fr));padding-inline:clamp(20px,4vw,42px)}
+ .verified-section{padding-inline:clamp(20px,4vw,42px)}
+}
+@media(min-width:1100px){
+ .app{padding-bottom:0}
+ .topbar{height:74px;padding:0 32px;z-index:45}
+ .app main{margin-left:104px}
+ .tabbar{position:fixed;left:0;top:74px;bottom:0;transform:none;width:104px;height:auto;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:8px;padding:25px 8px 10px;background:#0a1121;border-right:1px solid #3b4355;border-top:0;box-shadow:none}
+ .tabbar button{flex:0 0 79px;min-height:70px;width:100%;border-radius:12px}
+ .tabbar button.active{background:#17343e}
+ .tabbar button.active:before{width:3px;height:40px;left:0;top:15px}
+ .intro{padding:clamp(40px,5vw,85px) clamp(36px,5vw,90px) 32px}
+ .intro h1{font-size:clamp(75px,9vw,155px)}
+ .verified-section{padding:30px clamp(36px,5vw,90px) 12px}
+ .verified-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .filters{top:74px;padding-inline:clamp(36px,5vw,90px)}
+ .reels{padding-inline:clamp(36px,5vw,90px);grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+ .reel{height:clamp(480px,70dvh,780px)}
+ .reel h2{font-size:clamp(45px,4.4vw,72px)}
+ .content-page{padding:32px clamp(28px,4vw,78px)}
+ .category-grid,.directory-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .file-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #view-map{display:flex;flex-direction:column;gap:0;min-height:calc(100dvh - 74px)}
+ #view-map>.display{font-size:clamp(44px,4vw,70px);margin:10px 0}
+ #view-map>.lead{max-width:none;font-size:13px}
+ #view-map>.eyebrow{font-size:11px}
+ #view-map .native-map-root{display:flex;flex-direction:column;flex:1;min-height:0;margin:14px 0 0}
+ #view-map .native-map-viewport{height:clamp(460px,calc(100dvh - 365px),1100px);min-height:460px}
+ .native-map-toolbar{grid-template-columns:minmax(220px,1fr) 230px}
+ .native-map-header{padding:12px 17px}
+ .native-map-search input,.native-map-filter-label select{font-size:14px}
+}
+@media(max-width:699px){
+ .app{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+ .topbar{height:calc(62px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);position:sticky}
+ .brand-name{font-size:21px}
+ .settings-btn{flex:0 0 39px}
+ .edition{display:none}
+ .install-quick{margin-left:auto;padding:10px;font-size:10px}
+ .filters{top:calc(62px + env(safe-area-inset-top))}
+ .tabbar{padding:6px 5px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -5px 26px #030914a8}
+ .tabbar button{min-height:57px;font-size:11px;gap:2px}
+ .tabbar button span{font-size:24px}
+ .tabbar button.active:before{top:-6px}
+ .intro{padding:29px 17px 19px}
+ .reels{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding:0 9px}
+ .reel{height:calc(100dvh - 148px - env(safe-area-inset-top) - env(safe-area-inset-bottom));min-height:360px;max-height:780px}
+ .reel-bottom{max-height:75%;overflow:auto}
+ .verified-section{padding:19px 15px}
+ .content-page{padding:25px 13px}
+ #view-map{padding:8px 8px 14px;display:flex;flex-direction:column}
+ #view-map>.eyebrow,#view-map>.lead{display:none}
+ #view-map>.display{margin:1px 0 7px;font-size:37px;line-height:.9}
+ #view-map .native-map-root{margin:0;display:flex;flex-direction:column}
+ #view-map .native-map-header{padding:9px 11px}
+ #view-map .native-map-header strong{font-size:18px}
+ #view-map .native-map-offline{display:none}
+ #view-map .native-map-toolbar{padding:7px;grid-template-columns:minmax(0,1fr) 119px;gap:6px}
+ #view-map .native-map-search input{font-size:16px;height:43px}
+ #view-map .native-map-filter-label select{font-size:12px;height:45px}
+ #view-map .native-map-viewport{height:clamp(365px,calc(100dvh - 295px - env(safe-area-inset-top) - env(safe-area-inset-bottom)),850px);min-height:365px}
+ #view-map .native-map-status-row{font-size:10px;gap:4px}
+ #view-map .native-map-legend{padding:9px;gap:8px;font-size:9px}
+ .native-map-zoom button{min-height:44px;min-width:44px}
+ .directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:365px){#view-map .native-map-toolbar{grid-template-columns:minmax(0,1fr)}}
+@media(display-mode:standalone){.install-quick,.install-panel{display:none!important}}
+@media(prefers-reduced-motion:reduce){.reel:before{transition:none!important}.reel{scroll-snap-align:none}}

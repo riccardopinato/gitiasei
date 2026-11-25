@@ -17,6 +17,12 @@
 - Integrate map markers and source-checked points into the app's own canonical ID model; the current Canvas engine handles local saved/found and marker navigation; review remains necessary to establish actual gameplay accuracy.
 - Authorized clip playback through platform-compliant embeds, only where rights and privacy gates pass.
 
+## v0.5 · APPROVED NEON DASHBOARD (PR #9, preview only)
+- Rebuilt Web/PWA UI against approved Gitiasei Vice-neon screenshot, without flattening app into an image.
+- Desktop rail/topnav/hero/content-grid, mobile PWA controls, original local SVG artworks/icons.
+- Present only real app metrics and first-party official source links. Preserve map, directory, demo feed, spoiler, saved and found.
+- CI/Chrome screenshots, exact-head PR tests; production remains gated until separately authorized.
+
 ## v0.4 · COMMUNITY GROWTH
 - Original SEO-friendly canonical item pages only after verified content exists.
 - Rich offline saved/found lists with user-owned export/import and recovery.

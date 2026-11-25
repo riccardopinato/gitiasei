@@ -12,6 +12,16 @@ function prepareRoads(raw){
    return {kind,points,bbox};
  });
 }
+function prepareLand(polygons){
+ return polygons.map(rings=>{
+  const bbox=[Infinity,Infinity,-Infinity,-Infinity];
+  for(const ring of rings)for(const [x,y] of ring){
+   if(x<bbox[0])bbox[0]=x;if(y<bbox[1])bbox[1]=y;
+   if(x>bbox[2])bbox[2]=x;if(y>bbox[3])bbox[3]=y;
+  }
+  return {rings,bbox};
+ });
+}
 function text(parent,tag,className,value){
  const el=document.createElement(tag);if(className)el.className=className;
  el.textContent=String(value);parent.append(el);return el;
@@ -49,8 +59,14 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
  }));
  const [land,rawRoads,pack]=responses;
  const accepted=validateMapPack({land,roads:rawRoads,pins:pack});
- const roads=prepareRoads(rawRoads),pins=pack.pins,byId=new Map(pins.map(p=>[p.id,p]));
- const ctx=canvas.getContext("2d",{alpha:false});
+ const roads=prepareRoads(rawRoads),polygons=prepareLand(land.polygons);
+ const roadsByKind=new Map();
+ for(const road of roads){
+  if(!roadsByKind.has(road.kind))roadsByKind.set(road.kind,[]);
+  roadsByKind.get(road.kind).push(road);
+ }
+ const pins=pack.pins,byId=new Map(pins.map(p=>[p.id,p]));
+ const ctx=canvas.getContext("2d",{alpha:false,desynchronized:true});
  if(!ctx)throw new Error("Canvas 2D unavailable");
  const maxDpr=2;
  let width=0,height=0,dpr=1,camera=createCamera(),selected=null;
@@ -59,8 +75,13 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
  let filterGroup="all",query="",shownSuggestions=[];
  function resize(){
   const r=canvas.getBoundingClientRect();width=Math.max(220,Math.round(r.width));
-  height=Math.max(300,Math.round(r.height));dpr=Math.min(maxDpr,Math.max(1,window.devicePixelRatio||1));
-  canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
+  height=Math.max(300,Math.round(r.height));
+  // Bound the backing store on wide/HiDPI screens; CSS remains full-resolution.
+  const memoryDpr=Math.max(1,Math.sqrt(3500000/(width*height)));
+  dpr=Math.min(maxDpr,Math.max(1,window.devicePixelRatio||1),memoryDpr);
+  const pixelsW=Math.round(width*dpr),pixelsH=Math.round(height*dpr);
+  if(canvas.width!==pixelsW)canvas.width=pixelsW;
+  if(canvas.height!==pixelsH)canvas.height=pixelsH;
   requestDraw();
  }
  function requestDraw(){if(scheduled||destroyed)return;scheduled=true;requestAnimationFrame(()=>{
@@ -70,36 +91,34 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
   if(!width||!height||destroyed)return;
   ctx.setTransform(dpr,0,0,dpr,0,0);
   const water=ctx.createLinearGradient(0,0,width,height);
-  water.addColorStop(0,"#132b42");water.addColorStop(1,"#071624");
+  water.addColorStop(0,"#1b0a25");water.addColorStop(1,"#06030b");
   ctx.fillStyle=water;ctx.fillRect(0,0,width,height);
   const scale=viewportScale(camera,width,height);
   const sw=screenToWorld(-90,-90,camera,width,height);
   const ne=screenToWorld(width+90,height+90,camera,width,height);
   ctx.save();ctx.translate(width/2-camera.x*scale,height/2-camera.y*scale);ctx.scale(scale,scale);
   // Original Gitiasei rendering of open-licensed, locally bundled geometric data.
-  const step=32;ctx.strokeStyle="#a7e6e313";ctx.lineWidth=.65/scale;ctx.beginPath();
+  const step=32;ctx.strokeStyle="#ff4db51c";ctx.lineWidth=.65/scale;ctx.beginPath();
   for(let x=Math.floor(sw.x/step)*step;x<ne.x;x+=step){ctx.moveTo(x,sw.y);ctx.lineTo(x,ne.y)}
   for(let y=Math.floor(sw.y/step)*step;y<ne.y;y+=step){ctx.moveTo(sw.x,y);ctx.lineTo(ne.x,y)}
   ctx.stroke();
-  for(const poly of land.polygons){
-   ctx.beginPath();let minx=Infinity,miny=Infinity,maxx=-Infinity,maxy=-Infinity;
-   for(const ring of poly){
-    for(let i=0;i<ring.length;i++){
-      const p=ring[i];if(p[0]<minx)minx=p[0];if(p[1]<miny)miny=p[1];if(p[0]>maxx)maxx=p[0];if(p[1]>maxy)maxy=p[1];
-      if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);
-    }ctx.closePath();
-   }
+  for(const poly of polygons){
+   const [minx,miny,maxx,maxy]=poly.bbox;
    if(maxx<sw.x||maxy<sw.y||minx>ne.x||miny>ne.y)continue;
-   ctx.fillStyle="#294855";ctx.strokeStyle="#5b8e87";
+   ctx.beginPath();
+   for(const ring of poly.rings){
+    ring.forEach((p,i)=>{if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);});
+    ctx.closePath();
+   }
+   ctx.fillStyle="#302039";ctx.strokeStyle="#a6539b";
    ctx.lineWidth=.85/scale;ctx.fill("evenodd");ctx.stroke();
   }
   for(const [kind,color,px] of [
-   ["m","#8fc1ad27",.55],["s","#9ac0b755",.8],["a","#e4c59c76",1.25],["h","#fbcd9caf",1.65]
+   ["m","#ff59b329",.55],["s","#dca5df66",.8],["a","#f9b0d17b",1.25],["h","#ff8acac8",1.65]
   ]){
     if(kind==="m"&&camera.zoom<2.6)continue;
     ctx.beginPath();
-    for(const road of roads){
-      if(road.kind!==kind)continue;
+    for(const road of roadsByKind.get(kind)||[]){
       const [minx,miny,maxx,maxy]=road.bbox;
       if(maxx<sw.x||maxy<sw.y||minx>ne.x||miny>ne.y)continue;
       road.points.forEach((p,i)=>{if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);});
@@ -114,8 +133,8 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
     if(p.x<15||p.x>width-15||p.y<15||p.y>height-15)continue;
     ctx.font="900 "+(camera.zoom>3?15:12)+"px Arial,sans-serif";
     ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineWidth=4;
-    ctx.strokeStyle="#0b172dd0";ctx.strokeText(label.n.toUpperCase(),p.x,p.y);
-    ctx.fillStyle="#f0dab9";ctx.fillText(label.n.toUpperCase(),p.x,p.y);
+    ctx.strokeStyle="#090511f0";ctx.strokeText(label.n.toUpperCase(),p.x,p.y);
+    ctx.fillStyle="#ffe5f4";ctx.fillText(label.n.toUpperCase(),p.x,p.y);
   }
   clusterCache=showPins?clusteredPins(filtered,camera,width,height,{cell:camera.zoom>=4.4?36:camera.zoom>=3?48:65}):[];
   for(const cluster of clusterCache){

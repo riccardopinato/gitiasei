@@ -34,15 +34,17 @@ function spoiler(item) { return prefs.hideSpoilers && item.spoiler; }
 function showTab(tab) {
   if (!["feed", "map", "discover", "saved"].includes(tab)) return;
   activeTab = tab;
+  document.body.dataset.view = tab;
+  document.documentElement.style.scrollSnapType = tab === "feed" && window.innerWidth < 700 ? "y proximity" : "none";
   for (const view of document.querySelectorAll(".page")) view.hidden = view.id !== "view-" + tab;
-  for (const button of document.querySelectorAll(".tabbar button")) {
+  for (const button of document.querySelectorAll("nav [data-tab]")) {
     const selected = button.dataset.tab === tab;
     button.classList.toggle("active", selected);
     if (selected) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   }
   history.replaceState(null, "", "#" + tab);
-  window.scrollTo({ top: 0, behavior: "instant" });
+  window.scrollTo({ top: 0, behavior: "auto" });
   if (tab === "map") void renderMap();
 }
 function renderCategories() {
@@ -161,6 +163,8 @@ function renderDirectory() {
 }
 
 function renderSaved() {
+  if (el("dashboardSavedCount")) el("dashboardSavedCount").textContent = String(prefs.saved.length);
+  if (el("dashboardFoundCount")) el("dashboardFoundCount").textContent = String(prefs.found.length);
   el("savedCount").textContent = String(prefs.saved.length).padStart(2, "0");
   el("foundCount").textContent = String(prefs.found.length).padStart(2, "0");
   const items = filterDiscoveries(discoveries, { savedOnly: true, saved: prefs.saved });
@@ -185,7 +189,7 @@ function updateAfterStateChange() {
   const y = window.scrollY;
   renderAll();
   if (el("detailDialog").open && openId) renderDetail(openId);
-  window.scrollTo({ top: y, behavior: "instant" });
+  window.scrollTo({ top: y, behavior: "auto" });
 }
 function toggleSaved(id) {
   prefs.saved = toggleId(prefs.saved, id);
@@ -226,12 +230,16 @@ function showOnMap(id) {
   else if (id?.startsWith("gta6:location:")) void renderMap(id);
 }
 document.addEventListener("click", (event) => {
+  const settingsButton = event.target.closest("[data-open-settings]");
+  if (settingsButton) { el("spoilerToggle").checked = prefs.hideSpoilers; el("settingsDialog").showModal(); return; }
+  const scrollControl = event.target.closest("[data-dashboard-scroll]");
+  if (scrollControl) { el(scrollControl.dataset.dashboardScroll)?.scrollIntoView({behavior:"smooth",block:"start"}); return; }
   const close = event.target.closest("[data-close]");
   if (close) { el(close.dataset.close)?.close(); return; }
   const action = event.target.closest("[data-action]");
   if (action) {
     const id = action.dataset.id;
-    if (action.dataset.action === "directory") { activeDirectory = action.dataset.directory; renderDirectory(); el("view-discover").scrollIntoView({ block: "start" }); }
+    if (action.dataset.action === "directory") { activeDirectory = action.dataset.directory; showTab("discover"); renderDirectory(); el("view-discover").scrollIntoView({ block: "start" }); }
     if (action.dataset.action === "directory-back") { activeDirectory = null; renderDirectory(); el("view-discover").scrollIntoView({ block: "start" }); }
     if (action.dataset.action === "save") toggleSaved(id);
     if (action.dataset.action === "found") toggleFound(id);
@@ -276,6 +284,62 @@ window.addEventListener("hashchange", () => {
   const tab = location.hash.slice(1);
   if (tab !== activeTab) showTab(tab);
 });
+
+function syncPresentation() {
+  document.body.dataset.layout = window.innerWidth >= 1100 ? "desktop" : window.innerWidth >= 700 ? "tablet" : "mobile";
+  document.body.dataset.standalone = String(window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true);
+  document.documentElement.style.scrollSnapType = activeTab === "feed" && window.innerWidth < 700 ? "y proximity" : "none";
+}
+syncPresentation();
+window.addEventListener("resize", syncPresentation, { passive: true });
+
+// Web links remain ordinary links; installed Home Screen launches use the PWA
+// standalone shell. Browsers cannot force native installation on first visit.
+let deferredInstallPrompt = null;
+const installPanel = el("installPanel");
+const installButton = el("installAppButton");
+const installQuick = el("installQuick");
+const installHelp = el("installHelp");
+const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+function updateInstallUI() {
+  const installed = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  const onPhone = window.matchMedia("(max-width: 800px), (pointer: coarse)").matches;
+  installPanel.hidden = installed || !onPhone;
+  installButton.hidden = installed || !deferredInstallPrompt;
+  installQuick.hidden = installed || !onPhone || (!deferredInstallPrompt && !isIOS);
+  if (installed) return;
+  installHelp.textContent = isIOS
+    ? "In Safari, choose Share → Add to Home Screen. Open Gitiasei from its new icon."
+    : "In Chrome, open the menu and choose Install app or Add to Home screen. Then launch Gitiasei from the icon.";
+}
+async function offerInstall() {
+  if (!deferredInstallPrompt) {
+    if (!el("settingsDialog").open) el("settingsDialog").showModal();
+    return;
+  }
+  const prompt = deferredInstallPrompt;
+  deferredInstallPrompt = null;
+  await prompt.prompt();
+  updateInstallUI();
+}
+installButton.addEventListener("click", offerInstall);
+installQuick.addEventListener("click", offerInstall);
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  updateInstallUI();
+});
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  syncPresentation();
+  updateInstallUI();
+});
+window.matchMedia("(display-mode: standalone)").addEventListener?.("change", () => {
+  syncPresentation();
+  updateInstallUI();
+});
+updateInstallUI();
+
 renderAll();
 showTab(["feed", "map", "discover", "saved"].includes(location.hash.slice(1)) ?
   location.hash.slice(1) : "feed");

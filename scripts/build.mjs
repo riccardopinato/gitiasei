@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, rm, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { canonicalBuild } from "./build-canonical.mjs";
 import { validateMapPack } from "../src/native-map-core.mjs";
+import { writePwaIcons } from "./pwa-icons.mjs";
 
 const root = process.cwd();
 // Vercel executes `npm run build`, not `npm run verify`. Generate the pinned
@@ -17,11 +18,12 @@ for (const name of ["index.html", "src", "public"]) {
   if (name === "public") await cp(join(root, name), target, { recursive: true });
   else await cp(join(root, name), target, { recursive: true });
 }
+await writePwaIcons(dist);
 const index = await readFile(join(dist, "index.html"), "utf8");
 for (const required of ["./src/app.mjs", "./src/styles.css", "LEONIDA SIGNAL"]) {
   if (!index.includes(required)) throw new Error("Missing app entrypoint: " + required);
 }
-for (const required of ["src/app.mjs", "src/styles.css", "manifest.webmanifest", "sw.js"]) {
+for (const required of ["src/app.mjs", "src/styles.css", "manifest.webmanifest", "sw.js", "icon-192.png", "icon-512.png"]) {
   await stat(join(dist, required));
 }
 const [land, roads, pins] = await Promise.all(

@@ -27,7 +27,17 @@ Explore community discoveries about GTA VI through a vertical short-form feed, l
 - Treat spoilers, false claims, harassment and duplicated clips as moderation concerns.
 
 ## Design direction
-Reference: Design-App MOCK-STYLE-002 NEON. Editorial "sunset-noir", high-contrast compressed headlines, teal/coral/lilac accents, vivid original skyline illustrations, angular controls, small film-production microcopy. Avoid stock Material, look-alike official logos, copied key art and identical official typefaces.
+**APPROVED visual reference: 2026-11-25 Gitiasei Neon Vice dashboard** (user approved). This supersedes the original vague MOCK-STYLE-002 treatment for the Web/PWA visual surface.
+
+- Premium **deep-black glass** UI with fluorescent magenta/pink panel outlines, soft purple bloom and sparse cyan for secondary actions; do not return to petroleum blue or stock Material.
+- Desktop: immersive framed dashboard with left icon+label sidebar, top section tabs, original sunset-city hero, four content/action tiles, real project-stat panels and a sourced Rockstar information rail.
+- Mobile: native-app-like top bar and bottom navigation, hero with legible text, horizontal swipeable content cards, full-width map and safe-area touch controls.
+- Clear typography: robust high-contrast condensed sans for labels/headings, clean system UI for paragraphs, script neon only in the decorative "Vice City" hero title; no illegible Impact-style paragraphs.
+- Self-hosted original first-party artwork and vector icon sprite. Game title references remain nominative; no copied Rockstar art, logos, fonts or misleading official-brand affiliation.
+- No fake live audiences, social numbers, release countdowns, activity claims or functional "watch party" elements just to imitate a concept mock-up. Cards must navigate to current functional areas or a correctly attributed official external source.
+- All existing data contracts, spoiler shielding, saved/found stable IDs, native map and CC BY attribution are preserved.
+
+Historical reference: Design-App MOCK-STYLE-002 NEON.
 
 ## Boundaries
 - Gitiasei must render its primary map independently from **self-hosted, version-pinned map geometry**; external map iframes/tiles, branding overlays and map-provider requests are forbidden by product decision (25 Nov 2026).
