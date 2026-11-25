@@ -49,7 +49,7 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
  }));
  const [land,rawRoads,pack]=responses;
  const accepted=validateMapPack({land,roads:rawRoads,pins:pack});
- const roads=prepareRoads(rawRoads),pins=pack.pins;
+ const roads=prepareRoads(rawRoads),pins=pack.pins,byId=new Map(pins.map(p=>[p.id,p]));
  const ctx=canvas.getContext("2d",{alpha:false});
  if(!ctx)throw new Error("Canvas 2D unavailable");
  const maxDpr=2;
@@ -241,6 +241,7 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
  resize();stage.dataset.ready="true";
  status.textContent="SELF-HOSTED VECTOR MAP · "+accepted.landPolygons+" LAND SHAPES";
  return {
+  getPin(id){return byId.get(id)||null},
   refresh(){renderPinDetails(selected,detail,isSaved,isFound);requestDraw()},
   jumpToId(id){const pin=pins.find(p=>p.id===id);if(pin)select(pin);return Boolean(pin)},
   destroy(){destroyed=true;observer.disconnect()}
