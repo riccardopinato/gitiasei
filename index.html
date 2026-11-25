@@ -1,33 +1,116 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1020">
+<meta name="theme-color" content="#09060d">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Gitiasei">
 <meta name="mobile-web-app-capable" content="yes"><meta http-equiv="Content-Security-Policy" content="default-src &#39;self&#39;; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; connect-src &#39;self&#39;; img-src &#39;self&#39; data:; font-src &#39;self&#39;; frame-src &#39;none&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;"><meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Gitiasei: independent GTA VI companion with official reference files, source-attributed research preview and external video catalogue.">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-192.png"><link rel="icon" type="image/svg+xml" href="./icon.svg">
-<link rel="stylesheet" href="./src/styles.css">
-<title>LEONIDA SIGNAL — GITIASEI / UNOFFICIAL CONCEPT</title>
+<link rel="stylesheet" href="./src/styles.css"><link rel="stylesheet" href="./src/neon-ui.css">
+<title>Gitiasei — Leonida Signal | Unofficial GTA VI Companion</title>
 </head><body>
-<div class="app">
-<header class="topbar"><a href="#feed" class="brand" data-tab="feed"><span class="brand-mark">L<span>/</span>S</span><span class="brand-name">LEONIDA<small>SIGNAL / GITIASEI</small></span></a>
-<span class="edition"><i></i> <span class="edition-long">SELF-HOSTED ATLAS</span><span class="edition-short">ATLAS</span> <b>0.3</b></span>
-<button type="button" id="installQuick" class="install-quick" hidden>INSTALL APP</button><button id="settingsOpen" class="settings-btn" aria-label="Settings">☷</button></header>
+
+<div class="app neon-shell">
+<aside class="desktop-sidebar" aria-label="Primary navigation">
+  <div class="sidebar-logo">
+    <div class="game-reference" aria-label="Grand Theft Auto VI reference, unofficial">
+      <span>GRAND THEFT</span><span>AUTO <b>VI</b></span>
+      <em>GTA VI COMPANION</em>
+    </div>
+    <div class="sidebar-product"><strong>GITIASEI</strong><small>LEONIDA SIGNAL</small></div>
+  </div>
+  <nav class="side-nav" aria-label="Explore Gitiasei">
+    <button type="button" data-tab="feed" class="active" aria-current="page"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#home"></use></svg><span>HOME</span></button>
+    <button type="button" data-tab="map"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#map"></use></svg><span>MAP</span></button>
+    <button type="button" data-tab="discover"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#compass"></use></svg><span>DISCOVER</span></button>
+    <button type="button" data-tab="saved"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#bookmark"></use></svg><span>SAVED</span></button>
+    <button type="button" data-action="directory" data-directory="locations"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#layers"></use></svg><span>RESEARCH</span></button>
+    <button type="button" data-open-settings><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#settings"></use></svg><span>SETTINGS</span></button>
+  </nav>
+  <div class="sidebar-caption"><span class="signal-point"></span> COMMUNITY RESEARCH <small>UNOFFICIAL · INDEPENDENT</small></div>
+</aside>
+<header class="topbar" aria-label="App header">
+ <a href="#feed" class="brand" data-tab="feed"><span class="brand-mark">VI</span><span class="brand-name">GITIASEI<small>LEONIDA SIGNAL</small></span></a>
+ <nav class="top-nav" aria-label="Desktop sections">
+   <button type="button" data-tab="feed" class="active" aria-current="page"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#home"></use></svg><span>OVERVIEW</span></button>
+   <button type="button" data-tab="map"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#map"></use></svg><span>MAP</span></button>
+   <button type="button" data-tab="discover"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#compass"></use></svg><span>DISCOVER</span></button>
+   <button type="button" data-tab="saved"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#bookmark"></use></svg><span>SAVED</span></button>
+   <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#external"></use></svg> OFFICIAL SOURCE</a>
+ </nav>
+ <div class="top-actions">
+   <button type="button" id="installQuick" class="install-quick" hidden>INSTALL APP</button>
+   <button type="button" id="settingsOpen" class="settings-btn" aria-label="Open settings"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#settings"></use></svg></button>
+ </div>
+</header>
 <main>
-<section class="page" id="view-feed">
-  <div class="intro"><div class="eyebrow"><span class="dot"></span> THE DISCOVERY FREQUENCY // 001</div>
-  <h1>THE CITY<br><em>HAS SECRETS.</em></h1><p>Swipe the unexpected. Pin the location. Find it yourself.</p>
-  <aside class="demo-alert">CONCEPT MODE — Illustrative discovery cards only. Not genuine GTA VI clips or verified locations.</aside></div>
-  <section class="verified-section" aria-labelledby="officialHeading">
+
+<section class="page neon-feed" id="view-feed">
+ <div class="home-main">
+   <section class="hero-neon neon-panel" aria-labelledby="heroTitle">
+     <div class="hero-scene" role="img" aria-label="Original neon sunset city artwork with palms and a sports car"></div>
+     <div class="hero-copy">
+       <span class="hero-overline">WELCOME TO</span>
+       <h1 id="heroTitle">Vice <span>City</span></h1>
+       <p class="hero-project">GITIASEI <span>/ LEONIDA SIGNAL</span></p>
+       <p class="hero-game">GRAND THEFT AUTO VI <b>· UNOFFICIAL COMPANION</b></p>
+       <p class="hero-summary">Follow the official sources. Explore the Leonida atlas. Discover community research and keep track of your finds.</p>
+       <div class="hero-buttons">
+         <a class="cta cta-hot" href="https://www.rockstargames.com/VI/media/videos" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#play"></use></svg> WATCH OFFICIAL VIDEOS</a>
+         <button type="button" class="cta cta-outline" data-tab="map"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#map"></use></svg> OPEN MAP</button>
+       </div>
+       <small class="hero-disclaimer">Independent fan project · Original artwork · Community data unverified</small>
+     </div>
+   </section>
+   <section class="dashboard-content" aria-label="Featured Gitiasei sections">
+     <div class="section-heading"><h2>LATEST <span>CONTENT</span></h2><button type="button" data-tab="discover">EXPLORE ARCHIVE <svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#arrow"></use></svg></button></div>
+     <div class="feature-grid">
+       <a class="feature-card neon-panel feature-trailer" href="https://www.rockstargames.com/VI/media/videos" target="_blank" rel="noopener noreferrer"><div class="feature-image"></div><span class="feature-tag">OFFICIAL LINKS</span><strong>ROCKSTAR VIDEOS</strong><small>See trailers at their original source. No clips rehosted.</small><span class="feature-foot"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#play"></use></svg> WATCH AT ROCKSTAR</span></a>
+       <button type="button" class="feature-card neon-panel feature-map" data-tab="map"><div class="feature-image"></div><span class="feature-tag">INTERACTIVE</span><strong>LEONIDA MAP ATLAS</strong><small>Explore our self-hosted map and unverified points.</small><span class="feature-foot"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#map"></use></svg> OPEN EXPLORER</span></button>
+       <button type="button" class="feature-card neon-panel feature-discover" data-tab="discover"><div class="feature-image"></div><span class="feature-tag">EDITORIAL</span><strong>DISCOVER ARCHIVE</strong><small>Browse sourced names, facts and research sections.</small><span class="feature-foot"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#compass"></use></svg> EXPLORE FILES</span></button>
+       <button type="button" class="feature-card neon-panel feature-research" data-action="directory" data-directory="locations"><div class="feature-image"></div><span class="feature-tag">RESEARCH ONLY</span><strong>COMMUNITY LAB</strong><small>Investigate candidates with attribution and review status.</small><span class="feature-foot"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#layers"></use></svg> OPEN LAB</span></button>
+     </div>
+   </section>
+   <section class="metric-grid" aria-label="Gitiasei real project statistics">
+     <div class="metric-card neon-panel"><h3>RESEARCH <span>LAB</span></h3><div class="metric-wave" aria-hidden="true"><svg viewBox="0 0 320 70" preserveAspectRatio="none"><defs><linearGradient id="wave" x1="0" x2="1"><stop stop-color="#ff168e"/><stop offset=".55" stop-color="#ff6bd9"/><stop offset="1" stop-color="#ff128f"/></linearGradient></defs><path d="M0 45L17 34L28 47L42 20L58 44L74 30L91 51L108 38L122 14L139 48L155 41L168 56L185 24L203 34L214 13L234 44L251 26L270 47L287 21L304 42L320 29" fill="none" stroke="url(#wave)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="metric-copy"><strong>4,687</strong><small>UNVERIFIED RESEARCH PINS</small></div></div>
+     <div class="metric-card neon-panel"><h3>THE <span>DIRECTORY</span></h3><div class="metric-large"><strong>14</strong><span>SECTION INDEX</span></div><button type="button" class="metric-link" data-tab="discover">BROWSE DIRECTORY <svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#arrow"></use></svg></button></div>
+     <div class="metric-card neon-panel"><h3>YOUR <span>PROGRESS</span></h3><div class="mini-stats"><div><strong id="dashboardSavedCount">0</strong><small>SAVED</small></div><div><strong id="dashboardFoundCount">0</strong><small>FOUND</small></div></div><button type="button" class="metric-link" data-tab="saved">OPEN MY FILES <svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#arrow"></use></svg></button></div>
+     <div class="metric-card neon-panel"><h3>ATLAS <span>ENGINE</span></h3><div class="atlas-stats"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#map"></use></svg><div><strong>LOCAL CANVAS</strong><small>COASTLINES · ROADS · PINS</small></div></div><button type="button" class="metric-link" data-tab="map">OPEN MAP <svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#arrow"></use></svg></button></div>
+   </section>
+ </div>
+ <aside class="home-rail" aria-label="Leonida signal overview">
+   <section class="neon-panel rail-card city-overview">
+     <h2>LEONIDA <span>OVERVIEW</span></h2><div class="rail-city-image" role="img" aria-label="Original neon city panorama"></div>
+     <p>From the official setting to community exploration: one place to follow the sources, understand the map and collect discoveries.</p>
+     <div class="rail-stat-strip"><div><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#map"></use></svg><span>ATLAS</span></div><div><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#compass"></use></svg><span>PLACES</span></div><div><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#bookmark"></use></svg><span>FAVORITES</span></div></div>
+   </section>
+   <section class="neon-panel rail-card signal-overview">
+     <div class="rail-title-line"><h2>THE <span>SIGNAL</span></h2><small>LIVE APP DATA</small></div>
+     <div class="signal-big">16 <small>OFFICIAL REFERENCE RECORDS</small></div>
+     <p>Verified names and release references are kept distinct from community candidates.</p>
+     <button type="button" class="rail-action" data-dashboard-scroll="officialHeading"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#arrow"></use></svg> VIEW OFFICIAL SOURCES</button>
+   </section>
+   <section class="neon-panel rail-card rockstar-card">
+     <h2>FROM <span>ROCKSTAR</span></h2>
+     <div class="rockstar-source"><span class="source-monogram">R<span>★</span></span><div><strong>ROCKSTAR GAMES</strong><small>PRIMARY SOURCE · EXTERNAL LINK</small></div></div>
+     <p>Official GTA VI trailers, media and release information. Open the publisher's website for the latest updates.</p>
+     <div class="rockstar-image" role="img" aria-label="Original nighttime skyline art"></div>
+     <a class="rail-action" href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">VISIT OFFICIAL WEBSITE <svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#external"></use></svg></a>
+   </section>
+ </aside>
+ <section class="feed-explore">
+   <div class="section-heading"><h2>DISCOVERY <span>FEED</span></h2><small>FIVE DEMONSTRATION CARDS · NOT GAMEPLAY CLAIMS</small></div>
+   <section class="verified-section" aria-labelledby="officialHeading">
     <div class="subhead"><h3 id="officialHeading">OFFICIAL SOURCES</h3><small>Original source citations</small></div>
     <p class="directory-note">Named references and release facts checked on official Rockstar pages. No Rockstar images or clips are rehosted.</p>
     <div class="verified-grid" id="officialHighlights"></div>
-  </section>
-  <div class="filters" id="feedCategories" aria-label="Categories"></div>
-  <div class="reels" id="reelFeed"></div>
-  <p class="feed-end">END OF TEST SIGNAL · CREATOR-PERMITTED CLIPS COMING IN A LATER PHASE</p>
+   </section>
+   <div class="filters" id="feedCategories" aria-label="Categories"></div>
+   <div class="reels" id="reelFeed"></div>
+   <p class="feed-end">END OF TEST SIGNAL · CREATOR-PERMITTED CLIPS COMING IN A LATER PHASE</p>
+ </section>
 </section>
 <section class="page content-page" id="view-map" hidden>
  <span class="eyebrow">FILE 002 / LEONIDA ATLAS</span><h2 class="display">THE <em>MAP.</em></h2>
@@ -107,10 +190,10 @@
   <div class="subhead"><h3>YOUR FILES</h3><small>Saved on this device</small></div><div id="savedList" class="file-list"></div>
 </section></main>
 <nav class="tabbar" aria-label="Main navigation">
-  <button data-tab="feed" class="active" aria-current="page"><span>▣</span>FEED</button>
-  <button data-tab="map"><span>⌖</span>MAP</button>
-  <button data-tab="discover"><span>✧</span>DISCOVER</button>
-  <button data-tab="saved"><span>★</span>SAVED</button>
+ <button type="button" data-tab="feed" class="active" aria-current="page"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#home"></use></svg><span>HOME</span></button>
+ <button type="button" data-tab="map"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#map"></use></svg><span>MAP</span></button>
+ <button type="button" data-tab="discover"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#compass"></use></svg><span>DISCOVER</span></button>
+ <button type="button" data-tab="saved"><svg class="ico" aria-hidden="true"><use href="./neon-icons.svg#bookmark"></use></svg><span>SAVED</span></button>
 </nav></div>
 <dialog id="detailDialog" class="sheet" aria-labelledby="detailTitle"><div id="detailContent"></div><button type="button" data-close="detailDialog" class="close" aria-label="Close">×</button></dialog>
 <dialog id="settingsDialog" class="sheet settings-sheet" aria-labelledby="settingsTitle">

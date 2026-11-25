@@ -37,7 +37,7 @@ function showTab(tab) {
   document.body.dataset.view = tab;
   document.documentElement.style.scrollSnapType = tab === "feed" && window.innerWidth < 700 ? "y proximity" : "none";
   for (const view of document.querySelectorAll(".page")) view.hidden = view.id !== "view-" + tab;
-  for (const button of document.querySelectorAll(".tabbar button")) {
+  for (const button of document.querySelectorAll("nav [data-tab]")) {
     const selected = button.dataset.tab === tab;
     button.classList.toggle("active", selected);
     if (selected) button.setAttribute("aria-current", "page");
@@ -163,6 +163,8 @@ function renderDirectory() {
 }
 
 function renderSaved() {
+  if (el("dashboardSavedCount")) el("dashboardSavedCount").textContent = String(prefs.saved.length);
+  if (el("dashboardFoundCount")) el("dashboardFoundCount").textContent = String(prefs.found.length);
   el("savedCount").textContent = String(prefs.saved.length).padStart(2, "0");
   el("foundCount").textContent = String(prefs.found.length).padStart(2, "0");
   const items = filterDiscoveries(discoveries, { savedOnly: true, saved: prefs.saved });
@@ -228,6 +230,10 @@ function showOnMap(id) {
   else if (id?.startsWith("gta6:location:")) void renderMap(id);
 }
 document.addEventListener("click", (event) => {
+  const settingsButton = event.target.closest("[data-open-settings]");
+  if (settingsButton) { el("spoilerToggle").checked = prefs.hideSpoilers; el("settingsDialog").showModal(); return; }
+  const scrollControl = event.target.closest("[data-dashboard-scroll]");
+  if (scrollControl) { el(scrollControl.dataset.dashboardScroll)?.scrollIntoView({behavior:"smooth",block:"start"}); return; }
   const close = event.target.closest("[data-close]");
   if (close) { el(close.dataset.close)?.close(); return; }
   const action = event.target.closest("[data-action]");

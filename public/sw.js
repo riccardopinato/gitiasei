@@ -1,6 +1,6 @@
 // Self-hosted PWA: offline map pack, but fresh shell on each online visit.
-const CACHE = "gitiasei-immersive-v04-20261125";
-const ASSETS = ["./", "./index.html", "./src/styles.css", "./src/catalog.mjs", "./src/core.mjs", "./src/app.mjs", "./src/directory.mjs", "./src/preview.mjs", "./src/official.mjs", "./src/research-preview.mjs", "./src/native-map.mjs", "./src/native-map-core.mjs", "./data/map-land.v1.json", "./data/map-roads.v1.json", "./data/map-pins.v1.json", "./data/video-links.json", "./city.svg", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+const CACHE = "gitiasei-neon-v05-20261125";
+const ASSETS = ["./", "./index.html", "./src/styles.css", "./src/neon-ui.css", "./neon-city.svg", "./neon-map.svg", "./neon-research.svg", "./neon-icons.svg", "./src/catalog.mjs", "./src/core.mjs", "./src/app.mjs", "./src/directory.mjs", "./src/preview.mjs", "./src/official.mjs", "./src/research-preview.mjs", "./src/native-map.mjs", "./src/native-map-core.mjs", "./data/map-land.v1.json", "./data/map-roads.v1.json", "./data/map-pins.v1.json", "./data/video-links.json", "./city.svg", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
   self.skipWaiting();
