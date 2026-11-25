@@ -1,0 +1,153 @@
+{
+  "schema": "gitiasei.media.references.v1",
+  "capturedAt": "2026-11-25",
+  "purpose": "Independent link-only research registry; no hosted media or reproduction rights inferred.",
+  "pressKitUrl": "https://media.rockstargames.com/VI/downloads/videos/GTAVI_Videos.zip",
+  "pressKitFileCountAdvertised": 11,
+  "licenseNotice": "Official downloads do not automatically grant permission for redistribution or incorporation into our app. Check publisher media terms and third-party rights before download/rehosting.",
+  "items": [
+    {
+      "id": "rockstar:cover-art-animation",
+      "title": "Official Cover Art Animation",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:trailer-2",
+      "title": "Grand Theft Auto VI Trailer 2",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:jason-video",
+      "title": "Jason Duval Video Clip",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:lucia-video",
+      "title": "Lucia Caminos Video Clip",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:cal-video",
+      "title": "Cal Hampton Video Clip",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:boobie-video",
+      "title": "Boobie Ike Video Clip",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:dre-quan-video",
+      "title": "Dre'Quan Priest Video Clip",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:real-dimez-video",
+      "title": "Real Dimez Video Clip",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:raul-video",
+      "title": "Raul Bautista Video Clip",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:brian-video",
+      "title": "Brian Heder Video Clip",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:trailer-1",
+      "title": "Grand Theft Auto VI Trailer 1",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/media/videos",
+      "collection": "OFFICIAL_MEDIA_DOWNLOADS",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:launch-trailer",
+      "title": "Grand Theft Auto VI Launch Trailer",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/out-now",
+      "collection": "OFFICIAL_RELEASE_VIDEO",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    },
+    {
+      "id": "rockstar:extended-look",
+      "title": "Grand Theft Auto VI: An Extended Look",
+      "creator": "Rockstar Games",
+      "sourceUrl": "https://www.rockstargames.com/VI/out-now",
+      "collection": "OFFICIAL_RELEASE_VIDEO",
+      "reviewState": "SOURCE_PAGE_OBSERVED",
+      "embedStatus": "DISABLED",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "redistributionRight": "UNDETERMINED"
+    }
+  ]
+}
