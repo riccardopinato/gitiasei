@@ -123,8 +123,8 @@ function renderDirectory() {
     content = '<p class="directory-note">These five records are fictional presentation examples, not confirmed game discoveries.</p>' +
       '<div class="file-list">' + discoveries.map(file).join("") + '</div>';
   } else if (section.id === "locations") {
-    content = '<div class="empty"><b>CONCEPT MAP ONLY.</b><p>Current markers are fictional; there is no licensed GTA VI geography in this build.</p>' +
-      '<button type="button" data-tab="map">OPEN CONCEPT MAP ↗</button></div>';
+    content = '<div class="empty"><b>COMMUNITY MAP EMBED.</b><p>View an interactive community-built map with visible attribution. The 5 fictional demo pins remain in a separate expandable section.</p>' +
+      '<button type="button" data-tab="map">OPEN INTERACTIVE MAP ↗</button></div>';
   } else if (section.id === "checklists") {
     content = '<div class="empty"><b>LOCAL DEMO PROGRESS.</b><p>The Saved screen tracks bookmarked and marked demo discoveries on this device. Full GTA VI completion data is not loaded.</p>' +
       '<button type="button" data-tab="saved">OPEN SAVED ↗</button></div>';
@@ -187,8 +187,13 @@ function showOnMap(id) {
   if (el("detailDialog").open) el("detailDialog").close();
   showTab("map");
   renderMap(id);
+  // The demo pin has no known coordinates in the real community map.
+  // Open the separate fictional schematic instead of moving the live embed to a false location.
+  const concept = el("conceptMapDetails");
+  if (concept) concept.open = true;
   const target = [...document.querySelectorAll(".map-pin")].find((x) => x.dataset.id === id);
   target?.focus({ preventScroll: true });
+  concept?.scrollIntoView({ block: "start", behavior: "auto" });
   notify("CONCEPT PIN HIGHLIGHTED — NO REAL GAME COORDINATES");
 }
 document.addEventListener("click", (event) => {

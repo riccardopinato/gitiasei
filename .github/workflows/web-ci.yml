@@ -37,7 +37,11 @@ jobs:
           grep -q 'class="verified-card"' /tmp/gitiasei-browser/mobile-feed.html
           "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-extensions --no-first-run --virtual-time-budget=5000 --window-size=1280,800 --dump-dom "http://127.0.0.1:4173/#discover" > /tmp/gitiasei-browser/desktop-discover.html 2>>/tmp/gitiasei-browser/chrome.err
           grep -q 'class="directory-card"' /tmp/gitiasei-browser/desktop-discover.html
-          echo "Browser rendered sourced official cards and directory via JavaScript."
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-extensions --no-first-run --virtual-time-budget=5000 --window-size=390,844 --dump-dom "http://127.0.0.1:4173/#map" > /tmp/gitiasei-browser/mobile-map.html 2>>/tmp/gitiasei-browser/chrome.err
+          grep -q 'id="gameMapEmbed"' /tmp/gitiasei-browser/mobile-map.html
+          grep -q 'id="mapEmbedCredit"' /tmp/gitiasei-browser/mobile-map.html
+          grep -q 'id="conceptMapDetails"' /tmp/gitiasei-browser/mobile-map.html
+          echo "Browser rendered source-backed reference cards, directory, and attributed community map embed."
       - name: Upload static PWA browser smoke HTML
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
