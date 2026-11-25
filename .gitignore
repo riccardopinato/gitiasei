@@ -3,3 +3,4 @@ artifacts/
 node_modules/
 public/data/research-*.json
 public/data/research-manifest.json
+.private-media/

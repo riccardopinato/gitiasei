@@ -57,3 +57,11 @@ button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-vis
 .source-zip{display:inline-flex;margin:16px 0}
 @media(max-width:540px){.verified-section{padding:20px 16px}.verified-grid{grid-template-columns:1fr 1fr;gap:9px}.verified-card{padding:12px}.verified-card strong{font-size:26px}.verified-card p{font-size:11px}.source-row{padding:12px}.source-row code{display:none}}
 @media(max-width:365px){.verified-grid{grid-template-columns:1fr}}
+
+/* First release polish */
+.map-refs{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+.map-refs a{border:1px solid #ffffff45;background:#142f3b;padding:10px 13px;color:var(--aqua);text-decoration:none;font:800 13px var(--head)}
+html{scroll-snap-type:y proximity}
+.reel{scroll-margin-top:100px}
+@media(max-width:540px){.reel{height:calc(100dvh - 154px);min-height:360px;max-height:680px}.reel-serial{font-size:145px}.reel-bottom{max-height:75%;overflow:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-snap-type:none}}
