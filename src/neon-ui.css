@@ -56,7 +56,7 @@ button:hover,.rail-action:hover,.cta:hover,.feature-card:hover{border-color:#ff5
 .home-rail{display:grid;grid-template-rows:1.16fr .8fr 1fr;gap:12px;min-width:0}
 .neon-panel{position:relative;background:linear-gradient(160deg,#120a19,#08070d 67%);border:1px solid #844276;border-radius:11px;box-shadow:inset 0 1px 0 #ffffff20,0 0 0 1px #0a070b;overflow:hidden}
 .hero-neon{height:clamp(350px,30.4vw,490px);min-width:0;border-color:#cf479c}
-.hero-scene{position:absolute;inset:0;background-image:linear-gradient(90deg,#140619e8 0%,#120819b9 27%,#12081d3a 54%,transparent 88%),linear-gradient(0deg,#08060ce5 0%,transparent 37%),url("../neon-city.svg");background-position:center;background-size:cover;filter:saturate(1.15)}
+.hero-scene{position:absolute;inset:0;background-image:linear-gradient(90deg,#140619e8 0%,#120819b9 27%,#12081d3a 54%,transparent 88%),linear-gradient(0deg,#08060ce5 0%,transparent 37%),url("../assets/neon-hero-car.webp");background-position:center;background-size:cover;filter:saturate(1.05)}
 .hero-neon:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 50px #08030c80;pointer-events:none}
 .hero-copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;height:100%;width:min(72%,650px);padding:clamp(18px,2.6vw,40px) 0 20px clamp(18px,2.3vw,35px);text-shadow:0 2px 8px #08070e}
 .hero-overline{font:italic 1000 clamp(19px,2.6vw,38px)/1 var(--neon-font);letter-spacing:.6px;text-transform:uppercase}
@@ -84,10 +84,10 @@ button:hover,.rail-action:hover,.cta:hover,.feature-card:hover{border-color:#ff5
 .feature-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .feature-card{display:flex;flex-direction:column;align-items:flex-start;text-align:left;min-width:0;min-height:228px;padding:0 0 10px;background:#0b0810;color:#fff;border:1px solid #b6489e;border-radius:10px;overflow:hidden;text-decoration:none;cursor:pointer}
 .feature-card:hover{transform:translateY(-2px);box-shadow:0 0 18px #ed22846c}
-.feature-image{width:100%;height:112px;flex:0 0 112px;background-image:url("../neon-city.svg");background-size:cover;background-position:60% 43%;border-bottom:1px solid #a2448b}
-.feature-map .feature-image{background-image:url("../neon-map.svg")}
-.feature-discover .feature-image{background-image:url("../neon-city.svg");background-position:85% 45%;filter:hue-rotate(-12deg) saturate(1.4)}
-.feature-research .feature-image{background-image:url("../neon-research.svg")}
+.feature-image{width:100%;height:112px;flex:0 0 112px;background-image:url("../assets/neon-hero-car.webp");background-size:cover;background-position:60% 43%;border-bottom:1px solid #a2448b}
+.feature-map .feature-image{background-image:url("../assets/neon-atlas.webp")}
+.feature-discover .feature-image{background-image:url("../assets/neon-city-overview.webp");background-position:68% 46%;filter:saturate(1.06)}
+.feature-research .feature-image{background-image:url("../assets/neon-research.webp")}
 .feature-tag{margin:-14px 9px 8px;padding:4px 8px;background:#ff1b9d;color:#fff;font:italic 900 10px var(--neon-font);border:1px solid #ffa7d9;z-index:1;box-shadow:0 0 11px #e7108777}
 .feature-map .feature-tag{background:#9a31ce}
 .feature-discover .feature-tag{background:#692bb0}
@@ -122,7 +122,7 @@ button:hover,.rail-action:hover,.cta:hover,.feature-card:hover{border-color:#ff5
 .rail-card{padding:13px;min-width:0;display:flex;flex-direction:column;gap:10px}
 .rail-card h2{font-size:clamp(18px,1.6vw,25px);text-transform:uppercase}
 .rail-card>p{font:500 12px/1.5 var(--body-font);color:#f0e4ec}
-.rail-city-image,.rockstar-image{background-image:url("../neon-city.svg");background-size:cover;background-position:63% 39%;height:clamp(100px,12.4vw,175px);border:1px solid #b34693;border-radius:7px;flex:none}
+.rail-city-image,.rockstar-image{background-image:url("../assets/neon-city-overview.webp");background-size:cover;background-position:63% 39%;height:clamp(100px,12.4vw,175px);border:1px solid #b34693;border-radius:7px;flex:none}
 .rail-stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid #6b365c;padding-top:7px;margin-top:auto}
 .rail-stat-strip>div{display:grid;justify-items:center;gap:5px;padding:4px;border-right:1px solid #5f2a54;color:#ff56b6}
 .rail-stat-strip>div:last-child{border:0}
@@ -154,7 +154,7 @@ button:hover,.rail-action:hover,.cta:hover,.feature-card:hover{border-color:#ff5
 .feed-explore .reels{padding:0;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .feed-explore .reel{border-radius:9px;border:1px solid #7f4175;height:clamp(385px,43vw,550px);background:#260a32}
 .feed-explore .reel h2{font-family:var(--neon-font);font-weight:900}
-.feed-explore .reel:before{background-image:url("../neon-city.svg")}
+.feed-explore .reel:before{background-image:url("../assets/neon-research.webp")}
 .feed-explore .reel-actions button{border-color:#f949b6;background:#180b20e8}
 /* Keep the existing search, saved state, native map renderer and directory, but match the new art direction. */
 .content-page{background:#09060e;min-height:calc(100dvh - 110px)}
@@ -253,7 +253,7 @@ button:hover,.rail-action:hover,.cta:hover,.feature-card:hover{border-color:#ff5
  .neon-feed{display:block;padding:9px;background:#07050a}
  .home-main{gap:15px}
  .hero-neon{height:clamp(475px,76dvh,660px);border-radius:9px}
- .hero-scene{background-position:63% 45%;background-image:linear-gradient(0deg,#12051ae8 0%,#14061b63 58%,#12061c42 100%),linear-gradient(90deg,#11051a7a,transparent 60%),url("../neon-city.svg")}
+ .hero-scene{background-position:63% 45%;background-image:linear-gradient(0deg,#12051ae8 0%,#14061b63 58%,#12061c42 100%),linear-gradient(90deg,#11051a7a,transparent 60%),url("../assets/neon-hero-car.webp")}
  .hero-copy{width:100%;padding:27px 19px 18px;justify-content:flex-start}
  .hero-overline{font-size:25px}
  .hero-copy h1{font-size:clamp(61px,15vw,95px);letter-spacing:-3px;white-space:normal}

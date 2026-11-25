@@ -41,3 +41,19 @@ test("existing interactions remain wired across sidebar, topnav and cards",()=>{
  assert.match(js,/localStorage\.setItem\(STORAGE_KEY/);
  assert.match(js,/data-dashboard-scroll/);
 });
+
+test("cinematic imagery is local, lightweight, preloaded and replaces flat vector artwork",()=>{
+ const files=["neon-hero-car.webp","neon-city-overview.webp","neon-atlas.webp","neon-research.webp"];
+ for(const name of files){
+  const bytes=readFileSync(new URL("../public/assets/"+name,import.meta.url));
+  assert.equal(bytes.toString("ascii",0,4),"RIFF",name);
+  assert.equal(bytes.toString("ascii",8,12),"WEBP",name);
+  assert.ok(bytes.length>=30000&&bytes.length<210000,name);
+  assert.ok(css.includes("../assets/"+name),name+" not used by dashboard");
+  assert.ok(sw.includes("./assets/"+name),name+" not cached");
+ }
+ assert.match(html,/rel="preload" href="\.\/assets\/neon-hero-car\.webp"/);
+ const hero=css.match(/\.hero-scene\{[^}]+\}/)?.[0]||"";
+ assert.ok(hero.includes("../assets/neon-hero-car.webp"));
+ assert.ok(!hero.includes("neon-city.svg"));
+});
