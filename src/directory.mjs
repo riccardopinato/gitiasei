@@ -18,9 +18,11 @@ export const directoryModules = Object.freeze([
 export function filterDirectory(modules, search = "") {
   const term = String(search).trim().toLocaleLowerCase();
   if (!term) return modules;
+  // Prefer a direct title match over an incidental description match.
   return modules.filter((entry) =>
     [entry.title, entry.group, entry.description].some((value) => value.toLocaleLowerCase().includes(term))
-  );
+  ).sort((a, b) => Number(b.title.toLocaleLowerCase().includes(term)) -
+                    Number(a.title.toLocaleLowerCase().includes(term)));
 }
 
 export function validateDirectory(modules) {
