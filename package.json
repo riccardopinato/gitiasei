@@ -5,11 +5,11 @@
   "type": "module",
   "description": "Independent GTA VI community discoveries concept — web-first prototype",
   "scripts": {
-    "check": "node --check src/catalog.mjs && node --check src/directory.mjs && node --check src/core.mjs && node --check src/app.mjs && node --check src/canonical.mjs && node --check scripts/build-canonical.mjs && node --check scripts/build.mjs",
+    "check": "node --check src/catalog.mjs && node --check src/directory.mjs && node --check src/core.mjs && node --check src/app.mjs && node --check src/official.mjs && node --check src/research-preview.mjs && node --check src/preview.mjs && node --check src/canonical.mjs && node --check scripts/build-canonical.mjs && node --check scripts/validate-preview.mjs && node --check scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "canonical:build": "node scripts/build-canonical.mjs",
     "build": "node scripts/build.mjs",
-    "verify": "npm run check && npm test && npm run canonical:build && npm run build"
+    "verify": "npm run check && npm test && npm run canonical:build && node scripts/validate-preview.mjs && npm run build"
   },
   "engines": {
     "node": ">=20"
