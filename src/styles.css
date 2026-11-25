@@ -117,3 +117,25 @@ html{scroll-snap-type:y proximity}
 .native-map-attribution a{color:var(--aqua);margin-right:13px;display:inline-block}
 @media(max-width:540px){.native-map-header{padding:12px}.native-map-header strong{font-size:20px}.native-map-offline{max-width:118px;line-height:1.35}.native-map-toolbar{grid-template-columns:1fr 120px;padding:8px}.native-map-viewport{height:clamp(490px,67dvh,650px)}.native-map-status-row{padding:11px;font-size:10px}.native-map-legend{gap:11px;padding:12px}}
 @media(max-width:365px){.native-map-toolbar{grid-template-columns:1fr}.native-map-viewport{height:520px}.native-map-offline{font-size:9px}}
+
+/* Mobile usability fixes from actual 390px Chrome screenshot QA. */
+html,body{overflow-x:clip}
+.app{overflow-x:clip}
+.edition-short{display:none}
+.native-map-root{max-width:100%}
+@media(max-width:620px){
+ .topbar{padding:0 12px;gap:9px}
+ .brand{gap:7px;min-width:0}
+ .brand-name{font-size:23px;letter-spacing:.6px}
+ .brand-name small{font-size:8px;letter-spacing:1px}
+ .brand-mark{height:38px;width:36px;font-size:22px}
+ .edition{font-size:11px;letter-spacing:.2px;min-width:0}
+ .edition-long{display:none}
+ .edition-short{display:inline}
+ .edition i{margin-right:4px}
+ .settings-btn{flex:0 0 38px;width:38px;height:38px;font-size:23px}
+ .native-map-shield{top:14px;bottom:auto;left:62px;right:60px;transform:none;width:auto;max-width:none;padding:12px 10px}
+ .native-map-shield b{font-size:16px}
+ .native-map-shield p{font-size:11px;margin:6px 0 10px;line-height:1.4}
+ .native-map-shield button{font-size:11px;padding:10px}
+}
