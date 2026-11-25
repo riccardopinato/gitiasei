@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1150" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="sky" x1="0" x2=".3" y1="0" y2="1"><stop stop-color="#292349"/><stop offset=".33" stop-color="#8e4e74"/><stop offset=".75" stop-color="#ed8578"/><stop offset="1" stop-color="#ffb67b"/></linearGradient><linearGradient id="sea" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#a76078"/><stop offset="1" stop-color="#0c1229"/></linearGradient><pattern id="windows" width="19" height="27" patternUnits="userSpaceOnUse"><rect x="4" y="5" width="4" height="7" fill="#ffd2a2" opacity=".4"/></pattern></defs>
+<rect width="800" height="1150" fill="url(#sky)"/><circle cx="585" cy="340" r="116" fill="#ffd7a5" opacity=".7"/>
+<path d="M0 530l25-23v-85h45v-95h39v95h32v-54h49v-84h42v138h37v-121h39v-97h40v183h47v-107h44v-137h42v153h50v-98h46v98h50v-128h37v128h62v-82h37v82h51v-53h33v101H0Z" fill="#22233d"/>
+<path d="M0 530l25-23v-85h45v-95h39v95h32v-54h49v-84h42v138h37v-121h39v-97h40v183h47v-107h44v-137h42v153h50v-98h46v98h50v-128h37v128h62v-82h37v82h51v-53h33v101H0Z" fill="url(#windows)"/>
+<rect y="527" width="800" height="623" fill="url(#sea)"/><g fill="none" stroke="#ffca9d" opacity=".3" stroke-width="4"><path d="M0 560Q160 544 320 565T800 558"/><path d="M0 611Q180 586 380 613T800 593"/><path d="M0 672Q170 646 410 675T800 656"/></g>
+<path d="M0 898Q400 722 800 909V1150H0Z" fill="#14192c"/><path d="M400 807L343 1150M400 807l62 343" stroke="#f3a9a0" stroke-width="5" opacity=".3"/><path d="M400 820v330" stroke="#ffb678" stroke-width="5" stroke-dasharray="48 27"/>
+<g fill="#0b1429"><path d="M71 964Q10 678 58 465l10 2Q32 734 89 970Z"/><path d="M64 573Q0 531-20 452q82 16 94 110-10-89 45-159 27 90-32 155 79-73 152-53-50 72-158 73 82-19 137 26-60 35-142 5Z"/><path d="M721 936Q685 685 727 430l10 2q-37 262 3 511Z"/><path d="M733 536q-90-68-127-43 46 70 132 66-7-93 42-157 16 96-35 155 68-83 138-68-41 65-140 78 75-24 130 22-76 30-138-8Z"/></g>
+<path d="M0 1000l159-72 35 55L0 1099M800 995l-172-74-37 52 209 126" fill="#151f34"/><path d="M0 1024l139-67M800 1024l-153-73" stroke="#ff6d90" stroke-width="8" opacity=".75"/>
+</svg>

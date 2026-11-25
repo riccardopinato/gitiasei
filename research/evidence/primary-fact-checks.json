@@ -1,0 +1,26 @@
+{
+  "schema": "gitiasei.editorial.primary-checks.v1",
+  "checks": [
+    {
+      "id": "gta6:fact:releaseDate",
+      "expectedValue": "2026-11-19",
+      "primaryUrl": "https://www.rockstargames.com/newswire/article/39akk424a9oo53/grand-theft-auto-vi-now-available",
+      "checkedAt": "2026-11-25",
+      "reviewer": "EDITORIAL_PRIMARY_CHECK",
+      "method": "Official Rockstar 2026-11-19 launch announcement checked against fact value",
+      "note": "Release date independently checked on publisher's announcement; no claims about other facts or game content."
+    },
+    {
+      "id": "gta6:fact:platforms",
+      "expectedValue": [
+        "PlayStation 5",
+        "Xbox Series X|S"
+      ],
+      "primaryUrl": "https://www.rockstargames.com/newswire/article/39akk424a9oo53/grand-theft-auto-vi-now-available",
+      "checkedAt": "2026-11-25",
+      "reviewer": "EDITORIAL_PRIMARY_CHECK",
+      "method": "Official Rockstar launch announcement checked against platform value",
+      "note": "Primary publisher names PlayStation 5 and Xbox Series X|S; no further downstream assets licensed."
+    }
+  ]
+}

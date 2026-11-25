@@ -1,0 +1,558 @@
+html, body {
+    background: rgb(0, 0, 0);
+    font-family: sans-serif;
+    font-size: 12px;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+}
+
+
+
+body.light {
+    filter: none;
+    transform: none;
+}
+body.light,
+body.light a {
+    color: rgb(0, 0, 0);
+}
+body.light p a {
+    color: rgb(64, 128, 192);
+}
+body.light input[type="text"]:focus {
+    border-color: rgb(192, 192, 192);
+}
+body.light input[type="text"]::placeholder {
+    color: rgb(128, 128, 128);
+}
+body.light .mapPanel {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+body.light #listBody > .item.selected {
+    background-color: rgb(224, 224, 224);
+}
+body.light #itemBody > div.photo {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+
+
+body.dark {
+    filter: none;
+    transform: none;
+}
+body.dark,
+body.dark a {
+    color: rgb(224, 224, 224);
+}
+body.dark p a {
+    color: rgb(128, 192, 255);
+}
+body.dark input[type="text"]:focus {
+    border-color: rgb(64, 64, 64);
+}
+body.dark input[type="text"]::placeholder {
+    color: rgb(128, 128, 128)
+}
+body.dark .mapPanel {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+body.dark #listBody > .item.selected {
+    background-color: rgb(64, 64, 64);
+}
+body.dark #itemBody > div.photo {
+    background-color: rgba(224, 224, 224, 0.25);
+}
+
+
+
+body.michael {
+    filter: brightness(0.75) sepia(1);
+    transform: none;
+}
+body.amanda {
+    filter: saturate(4);
+    transform: none;
+}
+body.jimmy {
+    filter: invert(1);
+    transform: none;
+}
+body.tracey {
+    filter: hue-rotate(90deg);
+    transform: none;
+}
+body.trevor {
+    filter: blur(2px) brightness(1.25) contrast(1.5) hue-rotate(180deg) saturate(0.5);
+    transform: rotate(-1deg) scaleX(-1.05) scaleY(1.05);
+}
+body.trevor.streetview #googlemapsLayer {
+    filter: blur(4px);
+    transform: rotate(-5deg) scaleX(1.15) scaleY(1.15);
+}
+body.trevor #listPanel {
+    left: auto;
+    right: 0
+}
+body.trevor #itemPanel {
+    left: 0;
+    right: auto;
+}
+
+
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+body:not(.auth) .auth {
+    display: none;
+}
+body.hidden .mapPanel,
+body.hidden #streetviewIcon {
+    display: none;
+}
+body.hidden #uiIcon {
+    display: block;
+}
+
+
+
+div {
+    scrollbar-width: none;
+}
+div.light {
+    opacity: 0.5
+}
+p {
+    font-size: 13px;
+    line-height: 18px;
+    margin-block-end: 0;
+    margin-block-start: 0;
+    padding: 8px;
+}
+p.title {
+    font-weight: bold;
+    padding-bottom: 0;
+}
+span.bold {
+    font-weight: bold;
+}
+td {
+    font-size: 12px;
+    padding: 4px;
+}
+body.editing:not(.googlemaps) .marker.selected {
+    border: 2.5px solid rgb(192, 224, 255);
+}
+.marker.dragging {
+    border: 2px solid rgb(128, 128,128);
+}
+
+.marker.agriculture {
+    background-color: rgb(128, 128, 0);
+}
+.marker.government {
+    background-color: rgb(224, 0, 0);
+}
+.marker.hotel {
+    background-color: rgb(96, 224, 160);
+}
+.marker.industrial {
+    background-color: rgb(192, 192, 0);
+}
+.marker.landmark {
+    background-color: rgb(128, 0, 128);
+}
+.marker.leisure {
+    background-color: rgb(224, 0, 224);
+}
+.marker.mixed {
+    background-color: rgb(128, 0, 0);
+}
+.marker.office {
+    background-color: rgb(0, 224, 224);
+}
+.marker.other {
+    background-color: rgb(224, 224, 224);
+}
+.marker.public {
+    background-color: rgb(224, 112, 0);
+}
+.marker.natural {
+    background-color: rgb(0, 112, 0);
+}
+.marker.retail {
+    background-color: rgb(0, 0, 192);
+}
+.marker.restaurant {
+    background-color: rgb(160, 224, 96);
+}
+.marker.residential {
+    background-color: rgb(0, 192, 0);
+}
+.marker.transportation {
+    background-color: rgb(128, 128, 128);
+}
+.marker.utilities {
+    background-color: rgb(32, 32, 32);
+}
+
+.mapPanel {
+    backdrop-filter: blur(4px);
+    bottom: 0;
+    position: absolute;
+    top: 0;
+    width: 256px;
+    z-index: 1000;
+}
+.mapPanel .bar {
+    width: 248px;
+}
+#listPanel {
+    left: 0;
+}
+
+#titleBar {
+    left: 0;
+    top: 0;
+}
+#titleElement {
+    margin: 0;
+}
+#titleElement > div {
+    float: left;
+}
+.icon {
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    height: 14px;
+    padding: 3px;
+    text-align: center;
+    user-select: none;
+}
+.icon:not(#siteIcon) {
+    text-transform: uppercase;
+    width: 14px;
+}
+#uiIcon {
+    background-color: rgb(128, 128, 128);
+    display: none;
+    left: 8px;
+    position: absolute;
+    top: 8px;
+    z-index: 1000;
+}
+#streetviewIcon {
+    background-color: rgb(128, 128, 128);
+    display: none;
+    left: 262px;
+    position: absolute;
+    top: 6px;
+    z-index: 1000;
+}
+#siteIcon{
+    margin: 2px 2px;
+    padding: 3px 6px;
+}
+#userIcon {
+    margin: 2px 4px;
+}
+#mainBar {
+    left: 0;
+    top: 32px;
+}
+#mainBar select {
+    width: 112px;
+}
+#findBar {
+    left: 0;
+    top: 64px;
+}
+#findBar input {
+    margin: 3px 3px;
+    text-transform: uppercase;
+    width: 188px;
+}
+#findBar .button {
+    margin-right: 8px;
+}
+#filterBar {
+    left: 0;
+    top: 96px;
+}
+#filterBar select {
+    width: 188px;
+}
+#filterBar .button {
+    margin-right: 8px;
+}
+.clearButton, .closeButton {
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    height: 12px;
+    margin: 9px 8px;
+    user-select: none;
+}
+.clearButton {
+    display: none;
+}
+#sortBar {
+    left: 0;
+    top: 128px;
+}
+#sortBar select {
+    width: 188px;
+}
+#mainBar select, #filterBar select, #sortBar select {
+    margin: 2px 3px;
+    white-space: nowrap;
+}
+#listBody {
+    bottom: 32px;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    scrollbar-width: auto;
+    top: 160px;
+    width: 256px;
+}
+#listBody > .item {
+    border-left: 8px solid transparent;
+    cursor: pointer;
+    height: 32px;
+    width: 248px;
+}
+#listBody > .item div {
+    overflow-x: hidden;
+    pointer-events: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#listBody > .item .ig {
+    font-size: 12px;
+    font-weight: bold;
+    height: 13px;
+    left: 8px;
+    padding: 4px 8px 1px 8px;
+    top: 0;
+    width: 232px;
+}
+#listBody > .item .rl {
+    bottom: 0;
+    font-size: 9px;
+    height: 12px;
+    left: 8px;
+    padding: 1px 8px 2px 8px;
+    width: 232px;
+}
+#listStatusBar {
+    bottom: 0;
+    left: 0;
+}
+#listStatusBar .button:nth-child(2) {
+    margin-right: 8px;
+}
+#itemPanel {
+    bottom: 32px;
+    display: none;
+    font-size: 13px;
+    right: 0
+}
+#itemBar {
+    right: 0;
+    top: 0
+}
+#itemId {
+    font-size: 13px;
+    margin: 4px 6px;
+}
+#itemBody {
+    border-right: 8px solid transparent;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 4px;
+    position: absolute;
+    top: 32px;
+    width: 240px;
+}
+#itemBody > div.coordinates {
+    font-size: 12px;
+    margin: 4px;
+}
+#itemBody a,
+#itemBody span.link {
+    cursor: pointer;
+}
+#itemBody a:hover,
+#itemBody span.link:hover {
+    text-decoration: underline
+}
+#itemBody > div {
+    float: left;
+}
+#itemBody > div.address {
+    font-weight: bold;
+    margin: 4px;
+    width: 232px;
+}
+#itemBody > div.coordinates {
+    font-size: 12px;
+}
+#itemBody:not(.editing) > div:not(.photo) {
+    margin: 4px;
+}
+#itemBody:not(.editing) > div.photo {
+    height: 139.5px;
+    margin: 4px -4px;
+    width: 248px;
+}
+#itemBody:not(.editing) > div.photo > img {
+    cursor: pointer;
+}
+#editIgCoordinatesButton,
+#removeIgPhotoButton,
+#removeRlPhotoButton {
+    cursor: pointer;
+    margin-left: 8px;
+}
+#itemTags {
+    float: left;
+    font-size: 12px;
+    //margin: 8px 8px 2px 8px;
+    margin: 4px;
+    width: 232px;
+    text-transform: uppercase;
+}
+/*
+#itemBody.editing input,
+#itemBody.editing textarea {
+    padding: 2px 4px;
+}
+
+
+#itemBody > div.photo {
+    height: 139.5px;
+    margin-left: -4px;
+    width: 248px;
+}
+#itemBody > div.photo > img {
+    cursor: pointer;
+    width: 256px;
+}
+#itemBody > div > div {
+    float: left;
+    margin: 2px 2px;
+    width: 224px;
+}
+#itemBody > div.address {
+    font-weight: bold;
+}
+#itemBody > div.coordinates {
+    font-size: 11px;
+}
+itemBody > div > div.coordinates > a,
+#itemBody > div.coordinates > span.link {
+    cursor: pointer;
+}
+#itemBody > div.coordinates > a:hover,
+#itemBody > div.coordinates > span.link:hover {
+    text-decoration: underline
+}
+    */
+
+
+
+#itemEdited {
+    float: left;
+    font-size: 12px;
+    margin: 4px;
+    opacity: 0.5;
+    // padding: 2px 8px 8px 0px;
+    text-transform: uppercase;
+}
+#editItemBody {
+    border-right: 8px solid transparent;
+    bottom: 0;
+    left: 0;
+    overflow-y: scroll;
+    padding: 4px;
+    position: absolute;
+    top: 32px;
+    width: 240px;
+}
+#editItemIgPhoto, #editItemRlPhoto {
+    margin-left: -4px;
+}
+
+#coordinatesPanel {
+    height: 32px;
+    right: 0;
+    top: auto;
+}
+#coordinatesPanel.rounded {
+    border-top-left-radius: 8px;
+}
+#coordinatesBar {
+    bottom: 0;
+    right: 0;
+}
+#coordinatesElement {
+    font-size: 12px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#aboutDialog .content img {
+    height: 256px;
+    margin: 96px 96x;
+    width: 256px;
+}
+#photoDialog .bar .title {
+    width: 944px;
+}
+#photoDialog .content img {
+    border-radius: 0 0 8px 8px;
+    user-select: none;
+}
+#dialogPhoto {
+    border-radius: 0 0 8px 8px;
+}
+
+/*
+[contenteditable] {
+  outline: none;
+
+  display: inline-block;  
+
+  font: inherit;  
+  color: inherit;
+  line-height: inherit;
+  
+  white-space: normal;
+
+  user-select: text;
+}
+*/
+
+div[contenteditable="true"] {
+    all: unset;
+    outline: 1px dashed rgb(128, 128, 128)
+}
+div[contenteditable="true"]:focus {
+    all: unset;
+    outline: 1px dashed rgb(0, 128, 255)
+}

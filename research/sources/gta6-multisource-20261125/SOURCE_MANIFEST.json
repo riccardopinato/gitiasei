@@ -1,0 +1,132 @@
+{
+  "schema": "gitiasei.research.multisource.v1",
+  "date": "2026-11-25",
+  "baseline": "rolux/gtadb.org@b6334a3e3386d028e8ffb4eab35b584bf588e59d",
+  "editorial_decision": "HOLD_ALL_NEW_RECORDS",
+  "sources": [
+    {
+      "slug": "fbritoferreira",
+      "repository": "fbritoferreira/gta6",
+      "sha": "1a62727d4f4a44e2e3d6dfa62a0e2b80311e644a",
+      "license": "CC BY 4.0 (original data only; Rockstar imagery excluded)",
+      "files": [
+        "LICENSE",
+        "README.md",
+        "public/data/locations.json",
+        "public/data/places.json",
+        "public/data/categories.json",
+        "public/data/removed.json"
+      ],
+      "raw_records": {
+        "candidate_locations": 4687,
+        "places": 1021
+      },
+      "baseline_id_matches": {
+        "places": 1021,
+        "candidate_locations": 0
+      },
+      "independent_provenance": "places share canonical LIDs with gtadb; candidate locations have distinct IDs but largely lack record-level source URLs",
+      "status": "ARCHIVED_REVIEW"
+    },
+    {
+      "slug": "duanhesen",
+      "repository": "duanhesen/gta6-leonida-map-data",
+      "sha": "1c5977bb9c40401667a192f14239beebbde54211",
+      "license": "CC BY 4.0",
+      "files": [
+        "LICENSE",
+        "README.md",
+        "data/gta-6-markers.json",
+        "data/completion-100-thresholds.json",
+        "data/leonida-counties-summary.csv"
+      ],
+      "raw_records": {
+        "markers": 798
+      },
+      "baseline_id_matches": {
+        "markers": 798
+      },
+      "independent_provenance": "derived IDs lm-lNNNN map to gtadb LNNNN; corroboration NOT independent",
+      "status": "ARCHIVED_DERIVATIVE"
+    },
+    {
+      "slug": "zeshutmax",
+      "repository": "zeshutmax/gtasix-data",
+      "sha": "f5b8bbbd905633a6375e442d5acf4d8ed8808ed2",
+      "license": "CC BY 4.0",
+      "files": [
+        "LICENSE",
+        "README.md",
+        "data/gta6-facts.json",
+        "data/gta6-reviews.csv",
+        "data/prices.csv",
+        "data/unlock-times.csv"
+      ],
+      "raw_records": {
+        "fact_claims": 78
+      },
+      "independent_provenance": "mirror of GTA VI HOW; fact sources and status are included; mirror is not a second independent confirmation",
+      "status": "ARCHIVED_REVIEW"
+    }
+  ],
+  "additional_discovery": [
+    {
+      "name": "GTA6Gang Open Data",
+      "url": "https://gta6gang.com/pages/gta6-open-data.html",
+      "claimed_rows": 1818,
+      "license": "CC BY 4.0 claimed",
+      "status": "NOT_IMPORTED_REMOTE_JSON_UNAVAILABLE"
+    },
+    {
+      "name": "Offmap Intel",
+      "url": "https://github.com/offmapintel/gta6-data",
+      "status": "HOLD_LICENSE_NOT_SET",
+      "reason": "README says reuse terms not set yet"
+    },
+    {
+      "name": "Leonida Atlas",
+      "url": "https://github.com/navanem/gta6-leonida-atlas",
+      "status": "REFERENCE_ONLY",
+      "reason": "AGPL-3.0 software; landmark data derived from GTADB and may duplicate existing baseline"
+    },
+    {
+      "name": "SixNG/RageForge game asset extractors",
+      "url": "https://github.com/holdmysocks/SixNG",
+      "status": "OUT_OF_SCOPE",
+      "reason": "Avoid rehosting proprietary game assets and material subject to IP enforcement"
+    }
+  ],
+  "numerical_reconciliation": {
+    "gtadb_landmarks": 4195,
+    "fb_places": 1021,
+    "fb_places_duplicated_by_stable_id": 1021,
+    "duan_markers": 798,
+    "duan_markers_duplicated_by_stable_id": 798,
+    "fb_locations": 4687,
+    "fb_location_ids_unique": 4687,
+    "fb_location_ids_equal_to_gtadb_ids": 0,
+    "fb_location_has_coordinates": 4687,
+    "fb_location_confidence_community": 3097,
+    "fb_location_confidence_missing": 1590,
+    "fb_location_with_record_source_urls": 1,
+    "fb_location_repeated_name_labels": 189,
+    "fb_location_names_found_in_gtadb": 101,
+    "facts_total": 78,
+    "facts_claimed_confirmed": 37,
+    "facts_reported": 38,
+    "facts_not_announced": 3,
+    "facts_with_links": 76,
+    "facts_confirmed_with_links": 37,
+    "facts_confirmed_self_checked": 36,
+    "guaranteed_new_unique_publications": 0,
+    "new_candidate_location_ids_to_review": 4687
+  },
+  "rules": [
+    "ID equality proves cross-source identity only when both sources use same canonical ID namespace",
+    "identical names, overlapping coordinates, or status=sourced do not independently prove the fact",
+    "facts from mirrored sources do not count as a second independent verification",
+    "no source record may be added to runtime before source/accuracy, copyright, game coordinates and quality checks",
+    "both code and data copyright notices must be retained; game screenshots are not covered",
+    "no gameplay archive dumps, console binaries, secret APIs, or scraped credentials"
+  ]
+}

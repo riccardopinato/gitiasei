@@ -1,0 +1,91 @@
+{
+  "schema": "gitiasei.sources.watchlist.v1",
+  "checkedAt": "2026-11-25",
+  "notes": "Research watchlist; indexed counts and claims are not evidence of accurate facts or compatible redistribution licensing.",
+  "sources": [
+    {
+      "name": "FullSweep API",
+      "url": "https://fullsweepmap.com/developers/",
+      "scope": "API map markers, stats and source badges",
+      "status": "TERMS_TO_VERIFY",
+      "importedNewIds": 0
+    },
+    {
+      "name": "GTA6Gang Open Data",
+      "url": "https://gta6gang.com/pages/gta6-open-data.html",
+      "scope": "CSV/JSON vehicles, weapons, radio, animals; CC BY 4.0 claimed",
+      "status": "DIRECT_DOWNLOAD_UNAVAILABLE",
+      "importedNewIds": 0
+    },
+    {
+      "name": "GTA VI Tracker",
+      "url": "https://gtatracker.gg/vi/db",
+      "scope": "Multiple entity categories; independent accuracy and reuse rights unverified",
+      "status": "TERMS_TO_VERIFY",
+      "importedNewIds": 0
+    },
+    {
+      "name": "GTA Club",
+      "url": "https://gtaclub.app/",
+      "scope": "Mission/vehicle/character/collectible indexes",
+      "status": "TERMS_TO_VERIFY",
+      "importedNewIds": 0
+    },
+    {
+      "name": "Leonida Waypoint",
+      "url": "https://leonidawaypoint.com/database",
+      "scope": "Entities including missions, characters, vehicles, radio",
+      "status": "TERMS_TO_VERIFY",
+      "importedNewIds": 0
+    },
+    {
+      "name": "GTA-VI.org",
+      "url": "https://gta-vi.org/",
+      "scope": "Source-named compact database",
+      "status": "TERMS_TO_VERIFY",
+      "importedNewIds": 0
+    },
+    {
+      "name": "Project Vice",
+      "url": "https://projectvice.com/explore",
+      "scope": "Places and editorial records with source statuses",
+      "status": "TERMS_TO_VERIFY",
+      "importedNewIds": 0
+    },
+    {
+      "name": "GTADB.io",
+      "url": "https://gtadb.io/gta-6",
+      "scope": "Functional reference; owner-controlled database and terms",
+      "status": "NO_BULK_REUSE_UNLESS_AUTHORIZATION",
+      "importedNewIds": 0
+    },
+    {
+      "name": "SaveRift",
+      "url": "https://github.com/SaveRift/SaveRift-Ecosystem",
+      "scope": "Native-identifier research, not proof of playable models",
+      "status": "NO_GAME_ASSET_REHOST",
+      "importedNewIds": 0
+    },
+    {
+      "name": "Leonida Atlas",
+      "url": "https://github.com/navanem/gta6-leonida-atlas",
+      "scope": "AGPL code; map data largely derived from GTADB",
+      "status": "DERIVATIVE_MAP",
+      "importedNewIds": 0
+    },
+    {
+      "name": "GTA6Maps",
+      "url": "https://github.com/duanhesen/gta6-leonida-map-data",
+      "scope": "798 crosswalk marker IDs already in original GTADB set",
+      "status": "DERIVATIVE_ALREADY_ARCHIVED",
+      "importedNewIds": 0
+    },
+    {
+      "name": "Open GTA 6 Map",
+      "url": "https://github.com/fbritoferreira/gta6",
+      "scope": "4,687 research candidate IDs already staged",
+      "status": "ALREADY_ARCHIVED",
+      "importedNewIds": 0
+    }
+  ]
+}

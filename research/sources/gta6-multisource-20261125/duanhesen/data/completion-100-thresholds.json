@@ -1,0 +1,61 @@
+{
+  "name": "GTA 6 100% Completion Thresholds & Post-Launch Reference",
+  "source": "https://gta6maps.io/gta-6/100-percent-checklist",
+  "canonical_site": "https://gta6maps.io",
+  "license": "CC BY 4.0",
+  "updated": "2026-11-23",
+  "release_date": "2026-11-19",
+  "platforms": ["PlayStation 5", "Xbox Series X|S"],
+  "missable_items": false,
+  "in_game_checklist_unlock": "Complete all 91 main story missions (Map > Progress > Stats)",
+  "trophy_name": "The Long Road",
+  "story_chapters": [
+    { "chapter": 0, "title": "Prologue", "approx_missions": 1, "setting": "Vice-Dale County" },
+    { "chapter": 1, "title": "Just Like Paradise", "approx_missions": 22, "setting": "Leonida Keys (Mariana County)", "safehouse": "Jason's Stilt House (Key Lento)" },
+    { "chapter": 2, "title": "Paradise Lost", "approx_missions": 11, "setting": "Port Gellhorn (Kelly County)", "safehouse": "Starlet Motel (Port Gellhorn)" },
+    { "chapter": 3, "title": "Tits, Ass, Drug Money", "approx_missions": 26, "setting": "Vice City (Vice-Dale County)", "safehouse": "Bayside Apartments (Vice City)" },
+    { "chapter": 4, "title": "Vice City, Baby", "approx_missions": 25, "setting": "Vice City & Ocean Beach (Vice-Dale County)", "safehouse": "Suite at the Y Hotel (Ocean Beach)" },
+    { "chapter": 5, "title": "Top of the World, Ma", "approx_missions": 7, "setting": "State of Leonida" }
+  ],
+  "thresholds": [
+    { "category": "Main Story Missions", "required_for_100": 91, "total_in_game": 91, "tracker_url": "https://gta6maps.io/gta-6/missions" },
+    { "category": "Gang Operations", "required_for_100": 39, "total_in_game": 39, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Bank Jobs", "required_for_100": 22, "total_in_game": 22, "tracker_url": "https://gta6maps.io/gta-6/locations/banks-atms" },
+    { "category": "Payday Loan Jobs", "required_for_100": 7, "total_in_game": 7, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Smash 'n' Grabs", "required_for_100": 34, "total_in_game": 34, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Convenience Store Stick Ups", "required_for_100": 50, "total_in_game": 50, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Collectible Card Sets", "required_for_100": 15, "total_in_game": 18, "total_items": 480, "tracker_url": "https://gta6maps.io/gta-6/collectible-cards" },
+    { "category": "Cocaine Flamingos", "required_for_100": 100, "total_in_game": 125, "notes": "Shoot flamingos with black-and-white beaks", "tracker_url": "https://gta6maps.io/gta-6/cocaine-flamingos" },
+    { "category": "WAiNK Landmark Scans", "required_for_100": 100, "total_in_game": 100, "tracker_url": "https://gta6maps.io/gta-6/collectibles" },
+    { "category": "Combined Stunts", "required_for_100": 300, "trophy_threshold": 250, "total_in_game": 397, "breakdown": { "stunt_jumps": 130, "base_jumps": 25, "knife_flights": 40, "under_the_bridge": 202 }, "tracker_url": "https://gta6maps.io/gta-6/stunt-jumps" },
+    { "category": "Underwater Discoveries", "required_for_100": 33, "total_in_game": 33, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Magazines, Books & Comics", "required_for_100": 30, "total_in_game": 30, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Meditation Spots", "required_for_100": 15, "total_in_game": 15, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Vehicles Scanned (WAiNK)", "required_for_100": 200, "total_in_game": 557, "tracker_url": "https://gta6maps.io/gta-6/vehicles" },
+    { "category": "Animals Studied (Binoculars)", "required_for_100": 100, "total_in_game": 255, "tracker_url": "https://gta6maps.io/gta-6/animals" },
+    { "category": "Bret's Hunting Questline", "required_for_100": 15, "total_in_game": 15, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Basketball Hoops", "required_for_100": 90, "total_in_game": 90, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Drone Time Trials", "required_for_100": 42, "total_in_game": 42, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" },
+    { "category": "Shooting Range Gold Medals", "required_for_100": 42, "total_in_game": 42, "tracker_url": "https://gta6maps.io/gta-6/100-percent-checklist" }
+  ],
+  "fencing_milestones_usd": {
+    "narcotics": 100000,
+    "jewelry": 100000,
+    "marked_bills": 250000,
+    "vehicles": 200000
+  },
+  "purchasable_garages": {
+    "count": 8,
+    "price_range_usd": [4000, 40000],
+    "unlock_mission": "Daily Driver (Chapter 2)",
+    "app": "Vice City Real Estate",
+    "guide_url": "https://gta6maps.io/gta-6/garages"
+  },
+  "cheat_codes": {
+    "total_confirmed": 61,
+    "unlock_rule": "Complete all 91 story missions + individual cheat challenges",
+    "input_route": "Phone (D-pad Up) -> Hold L1+R1 (PS5) or LB+RB (Xbox) -> D-pad sequence",
+    "disables_saving_and_trophies": true,
+    "guide_url": "https://gta6maps.io/gta-6/cheats"
+  }
+}

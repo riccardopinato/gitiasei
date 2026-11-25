@@ -1,0 +1,15 @@
+{
+  "id": "./",
+  "name": "Leonida Signal — Community Discoveries",
+  "short_name": "Signal",
+  "description": "An independent concept for discovering and mapping short-form GTA VI community findings.",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080a14",
+  "theme_color": "#080a14",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

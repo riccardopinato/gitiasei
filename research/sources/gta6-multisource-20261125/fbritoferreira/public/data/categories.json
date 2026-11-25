@@ -1,0 +1,389 @@
+{
+  "groups": ["Collectibles", "Activities", "Crime", "Places", "Other"],
+  "kinds": [
+    {
+      "key": "flamingo",
+      "name": "Cocaine flamingos",
+      "colour": "#ff6fae",
+      "icon": "🦩",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "card",
+      "name": "Collectible cards",
+      "colour": "#ffd166",
+      "icon": "🃏",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "waink",
+      "name": "WAiNK scans",
+      "colour": "#7ae582",
+      "icon": "📷",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "magazine",
+      "name": "Magazines, books and comics",
+      "colour": "#c77dff",
+      "icon": "📚",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "meditation",
+      "name": "Meditation spots",
+      "colour": "#4cc9f0",
+      "icon": "🧘",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "underwater",
+      "name": "Underwater discoveries",
+      "colour": "#2a9df4",
+      "icon": "🐚",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "kenton",
+      "name": "Kenton sets",
+      "colour": "#f4a261",
+      "icon": "🎯",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "playlist",
+      "name": "Unique playlists",
+      "colour": "#e76f51",
+      "icon": "🎵",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "hoop",
+      "name": "Basketball hoops",
+      "colour": "#fb8500",
+      "icon": "🏀",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "bret",
+      "name": "Bret's target decks",
+      "colour": "#a3b18a",
+      "icon": "🦌",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "stunt",
+      "name": "Stunts and stunt jumps",
+      "colour": "#ef476f",
+      "icon": "🏍",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "race",
+      "name": "Races",
+      "colour": "#06d6a0",
+      "icon": "🏁",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "drone",
+      "name": "Drone time trials",
+      "colour": "#90e0ef",
+      "icon": "🛸",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "range",
+      "name": "Shooting ranges",
+      "colour": "#adb5bd",
+      "icon": "🔫",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "arcade",
+      "name": "Video games, pool and mini golf",
+      "colour": "#b8c0ff",
+      "icon": "🕹",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "gang",
+      "name": "Gang operations",
+      "colour": "#d62828",
+      "icon": "💀",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "bank",
+      "name": "Banks and vaults",
+      "colour": "#e9c46a",
+      "icon": "🏦",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "smash",
+      "name": "Smash 'n' Grabs",
+      "colour": "#f77f00",
+      "icon": "💎",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "store",
+      "name": "Stores to stick up",
+      "colour": "#8ecae6",
+      "icon": "🏪",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "fence",
+      "name": "Fences and Pay n Spray",
+      "colour": "#9a8c98",
+      "icon": "🔧",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "other",
+      "name": "Other",
+      "colour": "#ffffff",
+      "icon": "📍",
+      "group": "Other",
+      "pinnable": true
+    },
+    {
+      "key": "package",
+      "name": "Hidden packages",
+      "colour": "#ffb703",
+      "icon": "📦",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "meteorite",
+      "name": "Meteorites",
+      "colour": "#b5179e",
+      "icon": "☄️",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "treasure",
+      "name": "Treasures",
+      "colour": "#e0a100",
+      "icon": "💰",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "bottle",
+      "name": "Messages in a bottle",
+      "colour": "#48cae4",
+      "icon": "🍾",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "bookswap",
+      "name": "Book swaps",
+      "colour": "#9d4edd",
+      "icon": "📖",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "mural",
+      "name": "1010 murals",
+      "colour": "#ff5d8f",
+      "icon": "🎨",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "streetart",
+      "name": "Ahol Street Art",
+      "colour": "#06d6a0",
+      "icon": "🖌️",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "vehicle",
+      "name": "Standout vehicles",
+      "colour": "#f72585",
+      "icon": "🚗",
+      "group": "Collectibles",
+      "pinnable": true
+    },
+    {
+      "key": "bridge",
+      "name": "Under the bridge",
+      "colour": "#4361ee",
+      "icon": "🌉",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "knife",
+      "name": "Knife flights",
+      "colour": "#4895ef",
+      "icon": "🔪",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "basejump",
+      "name": "BASE jumps and parachuting",
+      "colour": "#3a86ff",
+      "icon": "🪂",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "fishing",
+      "name": "Fishing spots",
+      "colour": "#00b4d8",
+      "icon": "🎣",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "hunting",
+      "name": "Hunting",
+      "colour": "#6a994e",
+      "icon": "🏹",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "event",
+      "name": "Random events",
+      "colour": "#ff006e",
+      "icon": "❗",
+      "group": "Activities",
+      "pinnable": true
+    },
+    {
+      "key": "safe",
+      "name": "Safes",
+      "colour": "#c9a227",
+      "icon": "🔐",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "towatm",
+      "name": "Towable ATMs",
+      "colour": "#2ec4b6",
+      "icon": "🏧",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "payday",
+      "name": "Payday loans",
+      "colour": "#bc6c25",
+      "icon": "💵",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "weapon",
+      "name": "Weapon pickups",
+      "colour": "#8d99ae",
+      "icon": "🧨",
+      "group": "Crime",
+      "pinnable": true
+    },
+    {
+      "key": "safehouse",
+      "name": "Safehouses",
+      "colour": "#ffd60a",
+      "icon": "🏠",
+      "group": "Places",
+      "pinnable": false
+    },
+    {
+      "key": "shop",
+      "name": "Shops and services",
+      "colour": "#80ed99",
+      "icon": "🛍",
+      "group": "Places",
+      "pinnable": false
+    },
+    {
+      "key": "food",
+      "name": "Food, bars and clubs",
+      "colour": "#ff9f1c",
+      "icon": "🍔",
+      "group": "Places",
+      "pinnable": false
+    },
+    {
+      "key": "hotel",
+      "name": "Hotels",
+      "colour": "#f15bb5",
+      "icon": "🛏",
+      "group": "Places",
+      "pinnable": false
+    },
+    {
+      "key": "transport",
+      "name": "Transport",
+      "colour": "#00bbf9",
+      "icon": "🚉",
+      "group": "Places",
+      "pinnable": false
+    },
+    {
+      "key": "civic",
+      "name": "Police, hospitals and government",
+      "colour": "#577590",
+      "icon": "🏛",
+      "group": "Places",
+      "pinnable": false
+    },
+    {
+      "key": "leisure",
+      "name": "Leisure and sport",
+      "colour": "#9b5de5",
+      "icon": "🎡",
+      "group": "Places",
+      "pinnable": false
+    },
+    {
+      "key": "nature",
+      "name": "Natural features",
+      "colour": "#52b788",
+      "icon": "🌴",
+      "group": "Places",
+      "pinnable": false
+    },
+    {
+      "key": "building",
+      "name": "Buildings and landmarks",
+      "colour": "#ced4da",
+      "icon": "🏢",
+      "group": "Places",
+      "pinnable": false
+    }
+  ]
+}
