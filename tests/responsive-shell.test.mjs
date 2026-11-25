@@ -37,7 +37,7 @@ test("desktop fills viewport while mobile keeps touch safe-area navigation and m
  assert.match(app,/document\.body\.dataset\.layout/);
 });
 test("service worker uses a fresh shell with offline map assets",()=>{
- assert.match(sw,/gitiasei-immersive-v04/);
+ assert.match(sw,/gitiasei-neon-v05/);
  assert.match(sw,/map-\(land\|roads\|pins\)/);
  assert.match(sw,/event\.respondWith\(fetch\(request\)/);
  assert.match(sw,/\.\/icon-192\.png/);
