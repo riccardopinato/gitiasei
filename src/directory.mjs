@@ -1,7 +1,7 @@
 // Original navigation taxonomy. No third-party records, names, art or datasets are copied.
 export const directoryModules = Object.freeze([
   { id: "curiosities", title: "Curiosities & hidden finds", group: "DISCOVER", state: "PREVIEW", description: "Investigate peculiar details and links between discoveries. Only illustrative cards exist today." },
-  { id: "locations", title: "Locations & map", group: "EXPLORE", state: "PREVIEW", description: "Explore the attributed community map and a separate, clearly unverified location research archive." },
+  { id: "locations", title: "Locations & map", group: "EXPLORE", state: "PREVIEW", description: "Explore Gitiasei’s self-hosted native map alongside a clearly unverified research archive." },
   { id: "vehicles", title: "Vehicles", group: "REFERENCE", state: "PREVIEW", description: "A future vehicle directory with separately sourced details and discovery links." },
   { id: "missions", title: "Missions", group: "REFERENCE", state: "EMPTY", description: "A future story and activity index with source-backed relationships." },
   { id: "weapons", title: "Weapons", group: "REFERENCE", state: "EMPTY", description: "A future reference for verified weapon information and related locations." },

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1020"><meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1020"><meta http-equiv="Content-Security-Policy" content="default-src &#39;self&#39;; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; connect-src &#39;self&#39;; img-src &#39;self&#39; data:; font-src &#39;self&#39;; frame-src &#39;none&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;"><meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Gitiasei: independent GTA VI companion with official reference files, source-attributed research preview and external video catalogue.">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="stylesheet" href="./src/styles.css">
@@ -9,7 +9,7 @@
 </head><body>
 <div class="app">
 <header class="topbar"><a href="#feed" class="brand" data-tab="feed"><span class="brand-mark">L<span>/</span>S</span><span class="brand-name">LEONIDA<small>SIGNAL / GITIASEI</small></span></a>
-<span class="edition"><i></i> RESEARCH PREVIEW <b>0.2</b></span>
+<span class="edition"><i></i> <span class="edition-long">SELF-HOSTED ATLAS</span><span class="edition-short">ATLAS</span> <b>0.3</b></span>
 <button id="settingsOpen" class="settings-btn" aria-label="Settings">☷</button></header>
 <main>
 <section class="page" id="view-feed">
@@ -26,44 +26,59 @@
   <p class="feed-end">END OF TEST SIGNAL · CREATOR-PERMITTED CLIPS COMING IN A LATER PHASE</p>
 </section>
 <section class="page content-page" id="view-map" hidden>
-  <span class="eyebrow">FILE 002 / COMMUNITY CARTOGRAPHY</span><h2 class="display">THE <em>MAP.</em></h2>
-  <p class="lead">Explore the interactive Leonida map from Open GTA 6 Map. This is a community-built map, not official Rockstar cartography or independently certified coordinates.</p>
-  <div class="map-live-tag"><span aria-hidden="true">◉</span> COMMUNITY MAP · INTERACTIVE EMBED</div>
-  <div class="embedded-game-map">
-    <iframe id="gameMapEmbed"
-      src="https://fbritoferreira.github.io/gta6/?view=2.5%2F460.7%2F482.3&amp;embed=1"
-      width="100%" height="600" style="border:0" loading="lazy"
-      title="Interactive GTA VI map by Open GTA 6 Map contributors"
-      referrerpolicy="no-referrer" allowfullscreen
-      aria-describedby="mapEmbedCredit"></iframe>
+ <span class="eyebrow">FILE 002 / LEONIDA ATLAS</span><h2 class="display">THE <em>MAP.</em></h2>
+ <p class="lead">An independent map rendered by Gitiasei. Pan, zoom, filter and explore community research without an external map service.</p>
+ <section id="nativeMapStage" class="native-map-root" data-ready="false" aria-label="Gitiasei interactive map">
+  <header class="native-map-header">
+   <div><span class="native-map-label">● LOCAL MAP ENGINE</span><strong>LEONIDA / EXPLORER</strong></div>
+   <small class="native-map-offline">NO IFRAME · NO EXTERNAL TILES</small>
+  </header>
+  <div class="native-map-toolbar">
+   <label class="native-map-search"><span aria-hidden="true">⌕</span><input id="nativeMapSearch" type="search" autocomplete="off" placeholder="FIND A LOCATION..." aria-label="Search community locations"></label>
+   <label class="native-map-filter-label"><span class="sr-only">Map category</span>
+    <select id="nativeMapFilter" aria-label="Filter map markers">
+     <option value="all">ALL TYPES</option><option value="curiosities">CURIOSITIES</option>
+     <option value="places">PLACES</option><option value="vehicles">VEHICLES</option>
+     <option value="activities">ACTIVITIES</option><option value="collectibles">COLLECTIBLES</option>
+     <option value="reference">OTHER</option>
+    </select>
+   </label>
   </div>
-  <div class="map-credit-row" id="mapEmbedCredit">
-    <p>Map data by <a href="https://github.com/fbritoferreira/gta6" target="_blank" rel="noopener noreferrer">Open GTA 6 Map (fbritoferreira and contributors)</a>,
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
-      The attribution inside the map is intentionally preserved.</p>
-    <a href="https://fbritoferreira.github.io/gta6/?view=2.5%2F460.7%2F482.3" target="_blank" rel="noopener noreferrer">OPEN FULL MAP ↗</a>
+  <div id="nativeMapSearchResults" class="native-map-suggestions" hidden></div>
+  <div class="native-map-viewport">
+   <canvas id="nativeMapCanvas" role="img" aria-label="Local community map of Leonida with coastlines, roads and unverified markers. Drag to pan, scroll or use buttons to zoom."></canvas>
+   <div class="native-map-compass" aria-hidden="true">N ↑</div>
+   <div class="native-map-zoom">
+    <button type="button" data-native-map-action="zoom-in" aria-label="Zoom in">+</button>
+    <button type="button" data-native-map-action="zoom-out" aria-label="Zoom out">−</button>
+    <button type="button" data-native-map-action="reset" aria-label="Reset view">⌖</button>
+   </div>
+   <div id="nativeMapShield" class="native-map-shield">
+    <b>SPOILER SHIELD ACTIVE</b><p>Geography is visible. Community markers remain hidden until you choose to reveal them.</p>
+    <button type="button" id="nativeMapUnlock">SHOW COMMUNITY MARKERS ↗</button>
+   </div>
+   <span class="native-map-watermark">GITIASEI / LOCAL CARTOGRAPHY</span>
   </div>
-  <p class="map-privacy-note">This embedded map loads directly from an external site when the Map tab is opened; its navigation and progress remain managed by that site. If the embed cannot load, use Open full map.</p>
-  <details class="concept-map-details" id="conceptMapDetails">
-    <summary>VIEW FIVE FICTIONAL CONCEPT PINS <span>DEMO ONLY</span></summary>
-    <p class="directory-note">The following pins are original UI examples and do not correspond to real locations in the embedded community map.</p>
-    <div class="demo-alert">FICTIONAL SCHEMATIC · NOT THE GTA VI GAME MAP · PINS NOT GEOGRAPHIC FACTS</div>
-    <div class="map-canvas">
-    <svg viewBox="0 0 600 820" preserveAspectRatio="none" role="img" aria-label="Original fictional coastal map illustration">
-      <defs><linearGradient id="sea"><stop stop-color="#174a60"/><stop offset="1" stop-color="#0a293d"/></linearGradient>
-      <linearGradient id="land"><stop stop-color="#36324a"/><stop offset="1" stop-color="#493652"/></linearGradient>
-      <pattern id="grid" width="35" height="35" patternUnits="userSpaceOnUse"><path d="M35 0H0V35" fill="none" stroke="#bffaf1" stroke-opacity=".08"/></pattern></defs>
-      <rect width="600" height="820" fill="url(#sea)"/>
-      <path d="M0 0H410L386 86 450 143 399 224 448 330 401 420 451 498 405 597 477 696 436 820H0Z" fill="url(#land)" stroke="#ff8fa2" stroke-opacity=".65" stroke-width="4"/>
-      <path d="M0 0H410L386 86 450 143 399 224 448 330 401 420 451 498 405 597 477 696 436 820H0Z" fill="url(#grid)"/>
-      <g fill="none" stroke="#74dccc" stroke-opacity=".38" stroke-width="4"><path d="M114-20L206 214 162 393 227 570 181 840"/><path d="M324-20L291 208 342 380 280 580 349 840"/><path d="M0 167L425 163M0 345L420 331M0 525L430 523M0 728L451 720"/></g>
-      <g fill="none" stroke="#f9c499" stroke-opacity=".45" stroke-width="3" stroke-dasharray="11 12"><path d="M55-20Q207 228 129 393T287 840"/><path d="M358-10Q328 310 381 540T365 840"/></g>
-      <g fill="#f4c5c3" opacity=".65" font-size="14" letter-spacing="3" font-family="Arial"><text x="135" y="122">NORTH</text><text x="180" y="445">DOWNTOWN</text><text x="130" y="744">WETLANDS</text><text x="520" y="305" transform="rotate(90 520 305)">COASTAL WATERS</text></g>
-    </svg><span class="map-coordinates">LND / CONCEPT <b>25° N</b></span>
-    <div id="mapPins" class="map-pins"></div><span class="map-key">ORIGINAL ILLUSTRATION · NOT TO SCALE</span>
+  <div class="native-map-status-row"><span id="nativeMapStatus" role="status" aria-live="polite">LOADING LOCAL GEOGRAPHY...</span>
+    <span id="nativeMapCount">RESEARCH ONLY · UNVERIFIED</span>
   </div>
-    <div class="subhead"><h3>FICTIONAL FIELD MARKERS</h3><small id="mapCount">05 demo files</small></div><div id="mapList" class="file-list"></div>
-  </details>
+  <div id="nativeMapDetails" class="native-map-details" aria-live="polite" hidden></div>
+  <div class="native-map-legend" aria-label="Map categories">
+   <span><i class="legend-pink"></i>CURIOSITIES</span><span><i class="legend-teal"></i>PLACES</span>
+   <span><i class="legend-orange"></i>VEHICLES</span><span><i class="legend-green"></i>ACTIVITIES</span>
+   <span><i class="legend-purple"></i>COLLECTIBLES</span>
+  </div>
+  <footer class="native-map-footer">
+   <p>4,687 community research candidates, NOT verified GTA VI locations. Geography and classifications may contain inaccuracies. All map rendering and data are served by Gitiasei.</p>
+   <div class="native-map-attribution">
+    Map data © Open GTA 6 Map contributors · CC BY 4.0. Adapted / simplified in Gitiasei.
+    <details><summary>DATA CREDITS & LICENSE</summary><p>Open GTA 6 Map (fbritoferreira and contributors), CC BY 4.0. Simplified roads and coastlines; original Gitiasei renderer.</p>
+     <a href="https://github.com/fbritoferreira/gta6" target="_blank" rel="noopener noreferrer">Data source</a>
+     <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">License</a>
+    </details>
+   </div>
+  </footer>
+ </section>
 </section>
 <section class="page content-page" id="view-discover" hidden>
   <span class="eyebrow">FILE 003 / THE ARCHIVES</span><h2 class="display">STAY <em>CURIOUS.</em></h2>

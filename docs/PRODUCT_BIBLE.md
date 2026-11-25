@@ -30,7 +30,10 @@ Explore community discoveries about GTA VI through a vertical short-form feed, l
 Reference: Design-App MOCK-STYLE-002 NEON. Editorial "sunset-noir", high-contrast compressed headlines, teal/coral/lilac accents, vivid original skyline illustrations, angular controls, small film-production microcopy. Avoid stock Material, look-alike official logos, copied key art and identical official typefaces.
 
 ## Boundaries
-- A game-location map requires licensed geodata and independently checked pin locations; current illustration is NOT game geography.
+- Gitiasei must render its primary map independently from **self-hosted, version-pinned map geometry**; external map iframes/tiles, branding overlays and map-provider requests are forbidden by product decision (25 Nov 2026).
+- Where source coordinates or shapes are CC BY 4.0, preserve attribution, source/license links and modification notices, in a discreet data-credit area.
+- Geography and 4,687 candidate markers are *community research*, not independently confirmed Rockstar map locations; use clear status labels and default spoiler shielding.
+- In-map save/found progress uses stable IDs and must not disappear on catalog upgrades.
 - No backend, accounts, API scraping, remote clip ingestion, publication or live advertising at v0.1.
 - No claims of full playable video until rights-cleared media actually exists.
 
