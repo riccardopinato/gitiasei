@@ -59,11 +59,15 @@ export function buildCanonical({ landmarks, places, locations, markers, facts, p
   for (const [externalId, value] of Object.entries(landmarks)) {
     requireRecord(/^L\d+$/.test(externalId) && Array.isArray(value) && value.length === 9 &&
       typeof value[0] === "string" && Array.isArray(value[1]) &&
-      value[1].length === 2 && value[1].every(Number.isFinite), "landmark " + externalId);
+      (value[1].length === 0 || value[1].length === 2) && value[1].every(Number.isFinite),
+      "landmark " + externalId);
     const id = "gta6:landmark:" + externalId.toLowerCase();
     requireRecord(!records.has(id), "duplicate landmark " + id);
-    const item = newRecord(id, "landmark", value[0], "places",
-      { projection: "gtadb.org:game-map-6", x: value[1][0], y: value[1][1] },
+    const coordinate = value[1].length === 2 ?
+      { projection: "gtadb.org:game-map-6", x: value[1][0], y: value[1][1] } : null;
+    if (!coordinate) issues.push({ code: "MISSING_GAME_COORDINATES", id,
+      severity: "HIGH", action: "HOLD_UNPOSITIONED" });
+    const item = newRecord(id, "landmark", value[0], "places", coordinate,
       { tags: Array.isArray(value[6]) ? value[6] : [], realWorldReference: value[3] ?? null });
     joinSource(item, "gtadb", externalId);
     records.set(id, item);
