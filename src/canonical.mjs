@@ -67,7 +67,11 @@ export function buildCanonical({ landmarks, places, locations, markers, facts, p
       { projection: "gtadb.org:game-map-6", x: value[1][0], y: value[1][1] } : null;
     if (!coordinate) issues.push({ code: "MISSING_GAME_COORDINATES", id,
       severity: "HIGH", action: "HOLD_UNPOSITIONED" });
-    const item = newRecord(id, "landmark", value[0], "places", coordinate,
+    const hasName = typeof value[0] === "string" && value[0].trim().length > 0;
+    if (!hasName) issues.push({ code: "MISSING_LANDMARK_NAME", id,
+      severity: "HIGH", action: "HOLD_UNNAMED" });
+    const item = newRecord(id, "landmark",
+      hasName ? value[0] : "UNIDENTIFIED LANDMARK (" + externalId + ")", "places", coordinate,
       { tags: Array.isArray(value[6]) ? value[6] : [], realWorldReference: value[3] ?? null });
     joinSource(item, "gtadb", externalId);
     records.set(id, item);
