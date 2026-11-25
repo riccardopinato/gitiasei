@@ -39,9 +39,51 @@ export async function canonicalBuild() {
     authoredAt: "2026-11-25", records };
   const queue = records.filter((r) => r.type === "location").map((r) => ({
     id: r.id, name: r.title, category: r.group, priority: r.reviewPriority,
+    kind: r.attributes.kind, area: r.attributes.area ?? "",
     confidence: r.attributes.confidence, hasRecordSourceUrl: r.provenance.some((s) => s.recordSourceUrls?.length),
-    evidenceStatus: r.evidenceStatus, suspectedDuplicate: r.relations.some((s) => !s.merge)
+    evidenceStatus: r.evidenceStatus, suspectedDuplicate: r.relations.some((s) => !s.merge),
+    publicationStatus: r.publicationStatus
   }));
+  if (queue.length !== 4687 || queue.some((r) => r.publicationStatus !== "HOLD"))
+    throw new Error("Research preview must never publish candidate records");
+  const publicData = join(ROOT, "public", "data");
+  await mkdir(publicData, { recursive: true });
+  const groups = ["curiosities","places","vehicles","activities","collectibles","reference"];
+  const previewManifest = { schema: "gitiasei.research-preview.manifest.v1",
+    source: "Open GTA 6 Map (fbritoferreira/gta6)", license: "CC BY 4.0",
+    attributionUrl: "https://github.com/fbritoferreira/gta6",
+    revision: SOURCE_REVISIONS.openmap,
+    rightsNotice: "Names, labels and coordinates are unverified community submissions. No screenshots or gameplay media are included.",
+    publicationStatus: "RESEARCH_ONLY", itemCount: queue.length,
+    groups: Object.fromEntries(groups.map((g) => [g, queue.filter((r) => r.category === g).length])) };
+  for (const group of groups) {
+    const items = queue.filter((r) => r.category === group).map((r) => ({
+      id: r.id, name: r.name, kind: r.kind, area: r.area,
+      confidence: r.confidence, hasRecordSourceUrl: r.hasRecordSourceUrl,
+      suspectedDuplicate: r.suspectedDuplicate, status: "UNVERIFIED"
+    }));
+    const destination = join(publicData, "research-" + group + ".json");
+    const temp = destination + ".tmp";
+    try {
+      await writeFile(temp, JSON.stringify({ schema: "gitiasei.research-preview.v1",
+        category: group, status: "RESEARCH_ONLY", items }) + "\n");
+      await rename(temp, destination);
+    } catch (error) { await rm(temp, { force: true }); throw error; }
+  }
+  await writeFile(join(publicData, "research-manifest.json"),
+    JSON.stringify(previewManifest) + "\n");
+  const reviewBatches = join(destination, "review-batches");
+  await mkdir(reviewBatches, { recursive: true });
+  // Deterministic 100-ID disjoint batches. This is automated QA, not independent factual verification.
+  for (let i = 0; i < queue.length; i += 100) {
+    const batch = queue.slice(i, i + 100);
+    const name = String(i / 100 + 1).padStart(3, "0") + ".json";
+    const file = join(reviewBatches, name);
+    await writeFile(file, JSON.stringify({ schema: "gitiasei.review-batch.v1",
+      batch: i / 100 + 1, total: batch.length, certified: 0,
+      requiresIndependentEvidence: batch.filter((r) => !r.hasRecordSourceUrl).length,
+      records: batch }) + "\n");
+  }
   // Atomic per-file write; no overwrite of source or user data.
   for (const [name, json] of [
     ["canonical.catalog.v1.json", info],
