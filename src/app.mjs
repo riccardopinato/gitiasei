@@ -13,6 +13,7 @@ let stored = {};
 try { stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { /* unavailable or malformed */ }
 let prefs = sanitizePreferences(stored, validIds);
 let activeTab = "feed", category = "all", query = "", openId = null, activeDirectory = null, toastTimer;
+let nativeMapController = null, nativeMapTask = null, pendingMapId = null;
 
 function persist() {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); }
@@ -42,6 +43,7 @@ function showTab(tab) {
   }
   history.replaceState(null, "", "#" + tab);
   window.scrollTo({ top: 0, behavior: "instant" });
+  if (tab === "map") void renderMap();
 }
 function renderCategories() {
   el("feedCategories").innerHTML = categories.map((c) =>
@@ -82,15 +84,36 @@ function file(item, index) {
     '<button type="button" data-action="save" data-id="' + html(item.id) + '">' +
     (saved(item.id) ? '★' : '☆') + '</button></div></article>';
 }
-function renderMap(highlightId = null) {
-  el("mapPins").innerHTML = discoveries.map((item, i) =>
-    '<button type="button" data-action="detail" data-id="' + html(item.id) +
-    '" class="map-pin ' + (highlightId === item.id ? "selected" : "") + '" style="left:' +
-    item.map.x + '%;top:' + item.map.y + '%" aria-label="Open map file ' + html(spoiler(item) ? "SPOILER SHIELDED" : item.title) +
-    '"><span>' + (found(item.id) ? "✓" : String(i + 1).padStart(2, "0")) + '</span></button>'
-  ).join("");
-  el("mapList").innerHTML = discoveries.map(file).join("");
-  el("mapCount").textContent = discoveries.length + " demo pins";
+function renderMap(id = null) {
+  if (id?.startsWith("gta6:location:")) pendingMapId = id;
+  if (activeTab !== "map") return;
+  if (nativeMapController) {
+    nativeMapController.refresh();
+    if (pendingMapId && nativeMapController.jumpToId(pendingMapId)) pendingMapId = null;
+    return;
+  }
+  if (nativeMapTask) return;
+  nativeMapTask = import("./native-map.mjs").then(module => module.mountNativeMap({
+    isSaved: saved, isFound: found,
+    onSave: id => toggleSaved(id),
+    onFound: id => toggleFound(id),
+    getHideSpoilers: () => prefs.hideSpoilers,
+    onUnlock: () => {
+      prefs.hideSpoilers = false;
+      persist();
+      el("spoilerToggle").checked = false;
+      renderAll();
+      notify("COMMUNITY MARKERS VISIBLE · UNVERIFIED");
+    }
+  })).then(controller => {
+    nativeMapController = controller;
+    if (pendingMapId && controller.jumpToId(pendingMapId)) pendingMapId = null;
+    renderSaved();
+  }).catch(error => {
+    nativeMapTask = null;
+    el("nativeMapStatus").textContent = "LOCAL MAP UNAVAILABLE: " + String(error.message).slice(0,90);
+    console.error("Self-hosted map failed:",error);
+  });
 }
 function renderDiscover() {
   el("categoryGrid").innerHTML = categories.filter((c) => c.id !== "all").map((c, i) => {
@@ -141,8 +164,20 @@ function renderSaved() {
   el("savedCount").textContent = String(prefs.saved.length).padStart(2, "0");
   el("foundCount").textContent = String(prefs.found.length).padStart(2, "0");
   const items = filterDiscoveries(discoveries, { savedOnly: true, saved: prefs.saved });
-  el("savedList").innerHTML = items.length ? items.map(file).join("") :
-    '<div class="empty"><b>NOTHING ON FILE. YET.</b><p>Bookmark a discovery in the feed to find it here.</p>' +
+  const canonicalIds = [...new Set([...prefs.saved, ...prefs.found])].filter(id => id.startsWith("gta6:location:"));
+  const nativeItems = canonicalIds.map((id, index) => {
+    const pin = nativeMapController?.getPin(id);
+    const name = prefs.hideSpoilers ? "SPOILER SHIELDED" : (pin?.name || "MAP LOCATION");
+    const status = (saved(id) ? "SAVED " : "") + (found(id) ? "FOUND " : "");
+    return '<article class="file-card"><span class="file-index">M' + String(index+1).padStart(2,"0") +
+      '</span><div class="file-meta"><b>' + html(name) +
+      '</b><small>UNVERIFIED COMMUNITY PIN · ' + html(status) +
+      '</small></div><div class="file-actions"><button type="button" data-action="map" data-id="' +
+      html(id) + '">OPEN MAP ↗</button></div></article>';
+  }).join("");
+  el("savedList").innerHTML = (items.length || canonicalIds.length) ?
+    items.map(file).join("") + nativeItems :
+    '<div class="empty"><b>NOTHING ON FILE. YET.</b><p>Bookmark a discovery from the feed or native map to find it here.</p>' +
     '<button type="button" data-tab="feed">EXPLORE THE FEED ↗</button></div>';
 }
 function renderAll() { renderFeed(); renderMap(); renderDiscover(); renderSaved(); renderDirectory(); }
@@ -180,21 +215,15 @@ function renderDetail(id) {
     (saved(id) ? "★ SAVED" : "☆ SAVE FILE") + '</button>' +
     '<button data-action="found" data-id="' + html(id) + '">' +
     (found(id) ? "✓ TRACKED" : "○ MARK TRACKED") + '</button>' +
-    '<button data-action="map" data-id="' + html(id) + '">VIEW ON CONCEPT MAP ↗</button></div></div>';
+    '<button data-action="map" data-id="' + html(id) + '">OPEN MAP (DEMO WITHOUT REAL PIN) ↗</button></div></div>';
 }
 function openDetail(id) { renderDetail(id); if (!el("detailDialog").open) el("detailDialog").showModal(); }
 function showOnMap(id) {
   if (el("detailDialog").open) el("detailDialog").close();
+  if (id?.startsWith("gta6:location:")) pendingMapId = id;
   showTab("map");
-  renderMap(id);
-  // The demo pin has no known coordinates in the real community map.
-  // Open the separate fictional schematic instead of moving the live embed to a false location.
-  const concept = el("conceptMapDetails");
-  if (concept) concept.open = true;
-  const target = [...document.querySelectorAll(".map-pin")].find((x) => x.dataset.id === id);
-  target?.focus({ preventScroll: true });
-  concept?.scrollIntoView({ block: "start", behavior: "auto" });
-  notify("CONCEPT PIN HIGHLIGHTED — NO REAL GAME COORDINATES");
+  if (id?.startsWith("concept-")) notify("DEMO HAS NO REAL GAME COORDINATES");
+  else if (id?.startsWith("gta6:location:")) void renderMap(id);
 }
 document.addEventListener("click", (event) => {
   const close = event.target.closest("[data-close]");
