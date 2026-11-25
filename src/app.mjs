@@ -1,7 +1,8 @@
 import { categories, discoveries, catalogMeta } from "./catalog.mjs";
+import { directoryModules, filterDirectory, validateDirectory } from "./directory.mjs";
 import { filterDiscoveries, sanitizePreferences, toggleId, validateCatalog, STORAGE_KEY } from "./core.mjs";
 
-if (validateCatalog(discoveries).length) throw new Error("Invalid concept catalog");
+if (validateCatalog(discoveries).length || validateDirectory(directoryModules).length) throw new Error("Invalid concept catalog or directory");
 const el = (id) => document.getElementById(id);
 const html = (value) => String(value).replace(/[&<>"']/g, (char) => (
   { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]
@@ -10,7 +11,7 @@ const validIds = discoveries.map((item) => item.id);
 let stored = {};
 try { stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { /* unavailable or malformed */ }
 let prefs = sanitizePreferences(stored, validIds);
-let activeTab = "feed", category = "all", query = "", openId = null, toastTimer;
+let activeTab = "feed", category = "all", query = "", openId = null, activeDirectory = null, toastTimer;
 
 function persist() {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); }
@@ -101,6 +102,38 @@ function renderDiscover() {
     '<div class="empty"><b>NO SIGNAL FOUND.</b><p>Try a different search.</p></div>';
   el("discoverCount").textContent = items.length + " demo files";
 }
+
+function renderDirectory() {
+  const modules = filterDirectory(directoryModules, query);
+  el("directoryGrid").innerHTML = modules.length ? modules.map((section) =>
+    '<button type="button" class="directory-card" data-action="directory" data-directory="' + html(section.id) +
+    '" aria-label="Browse ' + html(section.title) + '">' +
+    '<span class="directory-overline">' + html(section.group) + ' / ' + html(section.state === "DEMO" ? "CONCEPT" : "NO DATA YET") + '</span>' +
+    '<strong>' + html(section.title) + '</strong><span class="directory-cta">OPEN SECTION ↗</span></button>'
+  ).join("") : '<div class="empty directory-empty">NO MATCHING SECTIONS.</div>';
+  el("directoryCount").textContent = String(modules.length).padStart(2, "0") + " SECTIONS";
+  const section = directoryModules.find((item) => item.id === activeDirectory);
+  el("discoverMain").hidden = Boolean(section);
+  el("directoryPanel").hidden = !section;
+  if (!section) { el("directoryPanel").innerHTML = ""; return; }
+  let content = '<div class="empty"><b>NO VERIFIED ENTRIES YET.</b><p>This section has an interface slot, not an imported GTADb database. Entries will appear only after independent sourcing and editorial review.</p></div>';
+  if (section.id === "curiosities") {
+    content = '<p class="directory-note">These five records are fictional presentation examples, not confirmed game discoveries.</p>' +
+      '<div class="file-list">' + discoveries.map(file).join("") + '</div>';
+  } else if (section.id === "locations") {
+    content = '<div class="empty"><b>CONCEPT MAP ONLY.</b><p>Current markers are fictional; there is no licensed GTA VI geography in this build.</p>' +
+      '<button type="button" data-tab="map">OPEN CONCEPT MAP ↗</button></div>';
+  } else if (section.id === "checklists") {
+    content = '<div class="empty"><b>LOCAL DEMO PROGRESS.</b><p>The Saved screen tracks bookmarked and marked demo discoveries on this device. Full GTA VI completion data is not loaded.</p>' +
+      '<button type="button" data-tab="saved">OPEN SAVED ↗</button></div>';
+  }
+  el("directoryPanel").innerHTML =
+    '<button type="button" class="directory-back" data-action="directory-back">← ALL SECTIONS</button>' +
+    '<span class="eyebrow">' + html(section.group) + ' / ' + html(section.state) + '</span>' +
+    '<h3 class="directory-heading">' + html(section.title) + '</h3>' +
+    '<p class="lead directory-intro">' + html(section.description) + '</p>' + content;
+}
+
 function renderSaved() {
   el("savedCount").textContent = String(prefs.saved.length).padStart(2, "0");
   el("foundCount").textContent = String(prefs.found.length).padStart(2, "0");
@@ -109,7 +142,7 @@ function renderSaved() {
     '<div class="empty"><b>NOTHING ON FILE. YET.</b><p>Bookmark a discovery in the feed to find it here.</p>' +
     '<button type="button" data-tab="feed">EXPLORE THE FEED ↗</button></div>';
 }
-function renderAll() { renderFeed(); renderMap(); renderDiscover(); renderSaved(); }
+function renderAll() { renderFeed(); renderMap(); renderDiscover(); renderSaved(); renderDirectory(); }
 function updateAfterStateChange() {
   const y = window.scrollY;
   renderAll();
@@ -161,6 +194,8 @@ document.addEventListener("click", (event) => {
   const action = event.target.closest("[data-action]");
   if (action) {
     const id = action.dataset.id;
+    if (action.dataset.action === "directory") { activeDirectory = action.dataset.directory; renderDirectory(); el("view-discover").scrollIntoView({ block: "start" }); }
+    if (action.dataset.action === "directory-back") { activeDirectory = null; renderDirectory(); el("view-discover").scrollIntoView({ block: "start" }); }
     if (action.dataset.action === "save") toggleSaved(id);
     if (action.dataset.action === "found") toggleFound(id);
     if (action.dataset.action === "detail") openDetail(id);
@@ -181,6 +216,7 @@ document.addEventListener("click", (event) => {
 el("discoverSearch").addEventListener("input", (event) => {
   query = event.target.value;
   renderDiscover();
+  renderDirectory();
 });
 el("settingsOpen").addEventListener("click", () => {
   el("spoilerToggle").checked = prefs.hideSpoilers;

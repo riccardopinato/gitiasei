@@ -42,10 +42,19 @@
 </section>
 <section class="page content-page" id="view-discover" hidden>
   <span class="eyebrow">FILE 003 / THE ARCHIVES</span><h2 class="display">STAY <em>CURIOUS.</em></h2>
-  <p class="lead">Choose a frequency. Every strange detail begins somewhere.</p>
-  <label class="search"><span>⌕</span><input id="discoverSearch" type="search" placeholder="SEARCH THE SIGNAL..." aria-label="Search discoveries"></label>
-  <div class="category-grid" id="categoryGrid"></div><div class="subhead"><h3>THE ARCHIVE</h3><small id="discoverCount"></small></div>
-  <div id="discoverList" class="file-list"></div>
+  <p class="lead">Search the concept files or explore an original GTA VI reference index.</p>
+  <div id="discoverMain">
+    <label class="search"><span>⌕</span><input id="discoverSearch" type="search" placeholder="SEARCH THE SIGNAL..." aria-label="Search demo files and directory sections"></label>
+    <div class="category-grid" id="categoryGrid"></div>
+    <section class="directory-section" aria-labelledby="directoryTitle">
+      <div class="subhead"><h3 id="directoryTitle">THE DIRECTORY</h3><small id="directoryCount">13 SECTIONS</small></div>
+      <p class="directory-note">Functional section previews. No external data imported; blank sections are deliberately empty.</p>
+      <div class="directory-grid" id="directoryGrid"></div>
+    </section>
+    <div class="subhead"><h3>THE ARCHIVE</h3><small id="discoverCount"></small></div>
+    <div id="discoverList" class="file-list"></div>
+  </div>
+  <section id="directoryPanel" class="directory-panel" hidden aria-live="polite"></section>
 </section>
 <section class="page content-page" id="view-saved" hidden>
   <span class="eyebrow">FILE 004 / PERSONAL ARCHIVE</span><h2 class="display">YOUR <em>STASH.</em></h2>
