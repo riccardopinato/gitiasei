@@ -59,6 +59,18 @@ test("priority ordering is deterministic and domain-specialized", () => {
   assert.equal(records.filter((r) => r.type === "location").length, 4687);
 });
 
+test("triage report separates candidate categories from baseline landmarks", () => {
+  assert.deepEqual(report.candidateGroups, {
+    curiosities: 952, places: 1720, vehicles: 664,
+    activities: 402, collectibles: 832, reference: 117
+  });
+  assert.deepEqual(report.candidateRecordSourceUrls, { present: 1, missing: 4686 });
+  assert.equal(report.candidateMissingConfidence, 1590);
+  assert.deepEqual(report.anomalyCounts, {
+    MISSING_GAME_COORDINATES: 93, MISSING_LANDMARK_NAME: 124
+  });
+});
+
 test("source content changes cannot retain old claims of primary verification", () => {
   const wrong = structuredClone(inputs);
   wrong.facts.find((f) => f.key === "releaseDate").value = "2030-01-01";
