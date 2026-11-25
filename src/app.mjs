@@ -34,6 +34,8 @@ function spoiler(item) { return prefs.hideSpoilers && item.spoiler; }
 function showTab(tab) {
   if (!["feed", "map", "discover", "saved"].includes(tab)) return;
   activeTab = tab;
+  document.body.dataset.view = tab;
+  document.documentElement.style.scrollSnapType = tab === "feed" && window.innerWidth < 700 ? "y proximity" : "none";
   for (const view of document.querySelectorAll(".page")) view.hidden = view.id !== "view-" + tab;
   for (const button of document.querySelectorAll(".tabbar button")) {
     const selected = button.dataset.tab === tab;
@@ -42,7 +44,7 @@ function showTab(tab) {
     else button.removeAttribute("aria-current");
   }
   history.replaceState(null, "", "#" + tab);
-  window.scrollTo({ top: 0, behavior: "instant" });
+  window.scrollTo({ top: 0, behavior: "auto" });
   if (tab === "map") void renderMap();
 }
 function renderCategories() {
@@ -185,7 +187,7 @@ function updateAfterStateChange() {
   const y = window.scrollY;
   renderAll();
   if (el("detailDialog").open && openId) renderDetail(openId);
-  window.scrollTo({ top: y, behavior: "instant" });
+  window.scrollTo({ top: y, behavior: "auto" });
 }
 function toggleSaved(id) {
   prefs.saved = toggleId(prefs.saved, id);
@@ -276,6 +278,62 @@ window.addEventListener("hashchange", () => {
   const tab = location.hash.slice(1);
   if (tab !== activeTab) showTab(tab);
 });
+
+function syncPresentation() {
+  document.body.dataset.layout = window.innerWidth >= 1100 ? "desktop" : window.innerWidth >= 700 ? "tablet" : "mobile";
+  document.body.dataset.standalone = String(window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true);
+  document.documentElement.style.scrollSnapType = activeTab === "feed" && window.innerWidth < 700 ? "y proximity" : "none";
+}
+syncPresentation();
+window.addEventListener("resize", syncPresentation, { passive: true });
+
+// Web links remain ordinary links; installed Home Screen launches use the PWA
+// standalone shell. Browsers cannot force native installation on first visit.
+let deferredInstallPrompt = null;
+const installPanel = el("installPanel");
+const installButton = el("installAppButton");
+const installQuick = el("installQuick");
+const installHelp = el("installHelp");
+const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+function updateInstallUI() {
+  const installed = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  const onPhone = window.matchMedia("(max-width: 800px), (pointer: coarse)").matches;
+  installPanel.hidden = installed || !onPhone;
+  installButton.hidden = installed || !deferredInstallPrompt;
+  installQuick.hidden = installed || !onPhone || (!deferredInstallPrompt && !isIOS);
+  if (installed) return;
+  installHelp.textContent = isIOS
+    ? "In Safari, choose Share → Add to Home Screen. Open Gitiasei from its new icon."
+    : "In Chrome, open the menu and choose Install app or Add to Home screen. Then launch Gitiasei from the icon.";
+}
+async function offerInstall() {
+  if (!deferredInstallPrompt) {
+    if (!el("settingsDialog").open) el("settingsDialog").showModal();
+    return;
+  }
+  const prompt = deferredInstallPrompt;
+  deferredInstallPrompt = null;
+  await prompt.prompt();
+  updateInstallUI();
+}
+installButton.addEventListener("click", offerInstall);
+installQuick.addEventListener("click", offerInstall);
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  updateInstallUI();
+});
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  syncPresentation();
+  updateInstallUI();
+});
+window.matchMedia("(display-mode: standalone)").addEventListener?.("change", () => {
+  syncPresentation();
+  updateInstallUI();
+});
+updateInstallUI();
+
 renderAll();
 showTab(["feed", "map", "discover", "saved"].includes(location.hash.slice(1)) ?
   location.hash.slice(1) : "feed");

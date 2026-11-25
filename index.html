@@ -1,16 +1,20 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1020"><meta http-equiv="Content-Security-Policy" content="default-src &#39;self&#39;; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; connect-src &#39;self&#39;; img-src &#39;self&#39; data:; font-src &#39;self&#39;; frame-src &#39;none&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;"><meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Gitiasei">
+<meta name="mobile-web-app-capable" content="yes"><meta http-equiv="Content-Security-Policy" content="default-src &#39;self&#39;; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; connect-src &#39;self&#39;; img-src &#39;self&#39; data:; font-src &#39;self&#39;; frame-src &#39;none&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;"><meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Gitiasei: independent GTA VI companion with official reference files, source-attributed research preview and external video catalogue.">
-<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icon.svg">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-192.png"><link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="stylesheet" href="./src/styles.css">
 <title>LEONIDA SIGNAL — GITIASEI / UNOFFICIAL CONCEPT</title>
 </head><body>
 <div class="app">
 <header class="topbar"><a href="#feed" class="brand" data-tab="feed"><span class="brand-mark">L<span>/</span>S</span><span class="brand-name">LEONIDA<small>SIGNAL / GITIASEI</small></span></a>
 <span class="edition"><i></i> <span class="edition-long">SELF-HOSTED ATLAS</span><span class="edition-short">ATLAS</span> <b>0.3</b></span>
-<button id="settingsOpen" class="settings-btn" aria-label="Settings">☷</button></header>
+<button type="button" id="installQuick" class="install-quick" hidden>INSTALL APP</button><button id="settingsOpen" class="settings-btn" aria-label="Settings">☷</button></header>
 <main>
 <section class="page" id="view-feed">
   <div class="intro"><div class="eyebrow"><span class="dot"></span> THE DISCOVERY FREQUENCY // 001</div>
@@ -112,6 +116,7 @@
 <dialog id="settingsDialog" class="sheet settings-sheet" aria-labelledby="settingsTitle">
  <div class="sheet-body"><span class="eyebrow">TRANSMISSION CONTROL</span><h2 id="settingsTitle">THE CONTROLS.</h2>
  <label class="setting"><span><b>SPOILER SHIELD</b><small>Hide sensitive previews</small></span><input type="checkbox" id="spoilerToggle" checked></label>
+ <div id="installPanel" class="install-panel" hidden><strong>GITIASEI ON YOUR PHONE</strong><p id="installHelp">Install this site from your browser menu for an app-like fullscreen experience.</p><button type="button" id="installAppButton" hidden>INSTALL APP ↗</button></div>
  <p class="disclaimer"><strong>UNOFFICIAL RESEARCH PREVIEW.</strong> Not affiliated with Rockstar Games or Take-Two. The reel files remain fictional demos. Official named references link to Rockstar; community research is labeled unverified. Videos are external references, not local files.</p></div>
  <button type="button" data-close="settingsDialog" class="close" aria-label="Close">×</button>
 </dialog>
