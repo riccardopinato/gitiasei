@@ -1,7 +1,7 @@
 # Roadmap — Gitiasei / Leonida Signal
 
 ## v0.2.0 · SOURCE-TRANSPARENT RESEARCH PREVIEW — IMPLEMENTED (pending merge)
-- Original responsive PWA shell, five explicitly fictional demo reel cards, schematic map, local-first saved/found and spoiler shield.
+- Original responsive PWA shell, five explicitly fictional demo reel cards, external interactive community-map embed with visible CC BY 4.0 attribution, separate fictional schematic, local-first saved/found and spoiler shield.
 - 14-section directory with source-checked Rockstar names and facts (8 characters, 6 regions and 2 launch/platform facts).
 - Community **research lab** with 4,687 source-attributed but unverified records, split into six lazy-loaded groups.
 - Canonical dataset of 8,960 staging entities with exact-ID provenance joins and 1,218 review-only duplicate suggestions.
@@ -14,7 +14,7 @@
 - Source-based factual checks for independent 100-ID batches, with proof, confidence and correct map projection per item.
 - Dedup review/decisions with stable redirect IDs; user-data-preserving catalog migration.
 - License audit for screenshots and media; moderated permissioned creator submissions, opt-out and takedown handling.
-- Real geographic map engine with verified game points, cluster/filter/canonical deep links.
+- Integrate map markers and source-checked points into the app's own canonical ID model; the current attributed cross-origin embed is functional but does not sync selections or saved/found state to Gitiasei.
 - Authorized clip playback through platform-compliant embeds, only where rights and privacy gates pass.
 
 ## v0.4 · COMMUNITY GROWTH
