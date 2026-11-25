@@ -172,13 +172,22 @@ export function buildCanonical({ landmarks, places, locations, markers, facts, p
     [group, result.filter((x) => x.group === group).length]));
   const evidenceCounts = Object.fromEntries([...new Set(result.map((x) => x.evidenceStatus))]
     .sort().map((state) => [state, result.filter((x) => x.evidenceStatus === state).length]));
+  const candidateGroups = Object.fromEntries(REVIEW_ORDER.filter((group) => group !== "facts")
+    .map((group) => [group, locsSorted.filter((x) => x.group === group).length]));
+  const anomalyCounts = Object.fromEntries([...new Set(issues.map((x) => x.code))]
+    .sort().map((code) => [code, issues.filter((x) => x.code === code).length]));
+  const sourceUrlCount = locsSorted.filter((x) =>
+    x.provenance.some((p) => Array.isArray(p.recordSourceUrls) && p.recordSourceUrls.length > 0)).length;
   const report = {
     schema: "gitiasei.canonical.report.v1", totalCanonical: result.length, originalLandmarks: baselineIds.size,
     locationsImportedToStaging: locsSorted.length, factsImportedToStaging: facts.length,
     existingPlaceIdsJoined: places.length, existingMarkerIdsJoined: markers.length,
     explicitRelationsNotMerged: aliases.length, primaryCheckedFacts: checksUsed.size,
     productionPublished: result.filter((x) => x.publicationStatus === "PUBLISHED").length,
-    groups: groupCounts, evidence: evidenceCounts, potentialDuplicatePairs: reviewMatches.length,
+    groups: groupCounts, candidateGroups, evidence: evidenceCounts,
+    candidateRecordSourceUrls: { present: sourceUrlCount, missing: locsSorted.length - sourceUrlCount },
+    candidateMissingConfidence: locsSorted.filter((x) => x.attributes.confidence === "UNSPECIFIED").length,
+    anomalyCounts, potentialDuplicatePairs: reviewMatches.length,
     issues, rules: ["RESEARCH_ONLY", "SOURCE_DERIVATIVES_NOT_INDEPENDENT",
       "NO_AUTO_MERGE_OF_NAME_MATCHES", "MIXED_COORDINATE_SYSTEMS_NOT_EQUIVALENT"]
   };
