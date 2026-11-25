@@ -38,6 +38,17 @@ for(let i=0;i<batches.length;i++){
 }
 if(reviewed!==total || [...ids].some(id=>!assigned.has(id)))
   throw new Error("Incomplete evidence batch coverage");
+const localPins=JSON.parse(readFileSync(join(base,"map-pins.v1.json"),"utf8"));
+if(localPins.schema!=="gitiasei.native-map.pins.v1" ||
+ localPins.projection!=="open-gta6-map:1024-units" ||
+ localPins.publicationStatus!=="RESEARCH_ONLY" ||
+ localPins.count!==4687 || localPins.pins.length!==4687 ||
+ new Set(localPins.pins.map(p=>p.id)).size!==4687 ||
+ localPins.pins.some(p=>p.status!=="UNVERIFIED"||
+ !Number.isFinite(p.x)||!Number.isFinite(p.y)))
+ throw new Error("Invalid generated self-hosted map marker pack");
+if([...ids].some(id=>!localPins.pins.some(p=>p.id===id)))
+ throw new Error("Map markers diverged from reviewed candidate ID set");
 const renderer=readFileSync(join(process.cwd(),"src","app.mjs"),"utf8");
 if(!renderer.includes("renderPreviewPanel("))throw new Error("Lab browser not mounted in app");
-console.log("Research validation: "+total+" unique HOLD records; 47 disjoint QA batches; 0 certified.");
+console.log("Research validation: "+total+" unique HOLD records; 47 disjoint QA batches; 4687 local map markers; 0 certified.");
