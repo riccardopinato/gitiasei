@@ -91,14 +91,14 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
   if(!width||!height||destroyed)return;
   ctx.setTransform(dpr,0,0,dpr,0,0);
   const water=ctx.createLinearGradient(0,0,width,height);
-  water.addColorStop(0,"#132b42");water.addColorStop(1,"#071624");
+  water.addColorStop(0,"#1b0a25");water.addColorStop(1,"#06030b");
   ctx.fillStyle=water;ctx.fillRect(0,0,width,height);
   const scale=viewportScale(camera,width,height);
   const sw=screenToWorld(-90,-90,camera,width,height);
   const ne=screenToWorld(width+90,height+90,camera,width,height);
   ctx.save();ctx.translate(width/2-camera.x*scale,height/2-camera.y*scale);ctx.scale(scale,scale);
   // Original Gitiasei rendering of open-licensed, locally bundled geometric data.
-  const step=32;ctx.strokeStyle="#a7e6e313";ctx.lineWidth=.65/scale;ctx.beginPath();
+  const step=32;ctx.strokeStyle="#ff4db51c";ctx.lineWidth=.65/scale;ctx.beginPath();
   for(let x=Math.floor(sw.x/step)*step;x<ne.x;x+=step){ctx.moveTo(x,sw.y);ctx.lineTo(x,ne.y)}
   for(let y=Math.floor(sw.y/step)*step;y<ne.y;y+=step){ctx.moveTo(sw.x,y);ctx.lineTo(ne.x,y)}
   ctx.stroke();
@@ -110,11 +110,11 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
     ring.forEach((p,i)=>{if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);});
     ctx.closePath();
    }
-   ctx.fillStyle="#294855";ctx.strokeStyle="#5b8e87";
+   ctx.fillStyle="#302039";ctx.strokeStyle="#a6539b";
    ctx.lineWidth=.85/scale;ctx.fill("evenodd");ctx.stroke();
   }
   for(const [kind,color,px] of [
-   ["m","#8fc1ad27",.55],["s","#9ac0b755",.8],["a","#e4c59c76",1.25],["h","#fbcd9caf",1.65]
+   ["m","#ff59b329",.55],["s","#dca5df66",.8],["a","#f9b0d17b",1.25],["h","#ff8acac8",1.65]
   ]){
     if(kind==="m"&&camera.zoom<2.6)continue;
     ctx.beginPath();
@@ -133,8 +133,8 @@ export async function mountNativeMap({isSaved=()=>false,isFound=()=>false,onSave
     if(p.x<15||p.x>width-15||p.y<15||p.y>height-15)continue;
     ctx.font="900 "+(camera.zoom>3?15:12)+"px Arial,sans-serif";
     ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineWidth=4;
-    ctx.strokeStyle="#0b172dd0";ctx.strokeText(label.n.toUpperCase(),p.x,p.y);
-    ctx.fillStyle="#f0dab9";ctx.fillText(label.n.toUpperCase(),p.x,p.y);
+    ctx.strokeStyle="#090511f0";ctx.strokeText(label.n.toUpperCase(),p.x,p.y);
+    ctx.fillStyle="#ffe5f4";ctx.fillText(label.n.toUpperCase(),p.x,p.y);
   }
   clusterCache=showPins?clusteredPins(filtered,camera,width,height,{cell:camera.zoom>=4.4?36:camera.zoom>=3?48:65}):[];
   for(const cluster of clusterCache){

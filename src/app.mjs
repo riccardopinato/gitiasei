@@ -239,7 +239,7 @@ document.addEventListener("click", (event) => {
   const action = event.target.closest("[data-action]");
   if (action) {
     const id = action.dataset.id;
-    if (action.dataset.action === "directory") { activeDirectory = action.dataset.directory; renderDirectory(); el("view-discover").scrollIntoView({ block: "start" }); }
+    if (action.dataset.action === "directory") { activeDirectory = action.dataset.directory; showTab("discover"); renderDirectory(); el("view-discover").scrollIntoView({ block: "start" }); }
     if (action.dataset.action === "directory-back") { activeDirectory = null; renderDirectory(); el("view-discover").scrollIntoView({ block: "start" }); }
     if (action.dataset.action === "save") toggleSaved(id);
     if (action.dataset.action === "found") toggleFound(id);
