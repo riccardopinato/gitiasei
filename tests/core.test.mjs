@@ -32,3 +32,17 @@ test("unlicensed/unsourced published clips cannot pass catalog validation", () =
   const invalid = [{ ...discoveries[0], status: "PUBLISHED" }];
   assert.match(validateCatalog(invalid).join(" "), /without verified provenance/);
 });
+
+test("saved or found stable IDs survive temporary removal from source catalog", () => {
+  assert.deepEqual(sanitizePreferences({
+    saved:["concept-999","gta6:location:vehicle-001","official:character:jason-duval"],
+    found:["concept-003","gta6:landmark:l123"],hideSpoilers:false
+  },discoveries.map((d)=>d.id)), {
+    saved:["concept-999","gta6:location:vehicle-001","official:character:jason-duval"],
+    found:["concept-003","gta6:landmark:l123"],hideSpoilers:false
+  });
+});
+test("NaN and Infinity are rejected as map coordinates", () => {
+  assert.match(validateCatalog([{...discoveries[0],map:{x:NaN,y:42}}]).join(" "),/invalid concept coordinates/);
+  assert.match(validateCatalog([{...discoveries[0],map:{x:42,y:Infinity}}]).join(" "),/invalid concept coordinates/);
+});

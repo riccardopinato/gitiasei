@@ -12,8 +12,8 @@ export function validateCatalog(records) {
     if (!record.title || !record.summary) issues.push(index + ": incomplete editorial text");
     if (!allowed.has(record.category) || record.category === "all") issues.push(index + ": invalid category");
     if (!["DEMO", "REVIEWED", "PUBLISHED"].includes(record.status)) issues.push(index + ": invalid state");
-    if (typeof record.map?.x !== "number" || record.map.x < 0 || record.map.x > 100 ||
-        typeof record.map?.y !== "number" || record.map.y < 0 || record.map.y > 100) {
+    if (!Number.isFinite(record.map?.x) || record.map.x < 0 || record.map.x > 100 ||
+        !Number.isFinite(record.map?.y) || record.map.y < 0 || record.map.y > 100) {
       issues.push(index + ": invalid concept coordinates");
     }
     if (record.status === "PUBLISHED" &&
@@ -43,9 +43,12 @@ export function filterDiscoveries(records, { category = "all", search = "", save
 export function sanitizePreferences(raw, validIds) {
   const ids = new Set(validIds);
   const safe = raw && typeof raw === "object" ? raw : {};
+  // Preserve valid stable IDs across catalog updates; records can be temporarily absent.
+  const stableId = (id) => typeof id === "string" && id.length <= 128 &&
+    (ids.has(id) || /^(?:concept-[0-9]+|official:[a-z-]+:[a-z0-9-]+|gta6:[a-z-]+:[a-z0-9-]+)$/.test(id));
   return {
-    saved: Array.isArray(safe.saved) ? [...new Set(safe.saved.filter((id) => ids.has(id)))] : [],
-    found: Array.isArray(safe.found) ? [...new Set(safe.found.filter((id) => ids.has(id)))] : [],
+    saved: Array.isArray(safe.saved) ? [...new Set(safe.saved.filter(stableId))] : [],
+    found: Array.isArray(safe.found) ? [...new Set(safe.found.filter(stableId))] : [],
     hideSpoilers: safe.hideSpoilers !== false
   };
 }
